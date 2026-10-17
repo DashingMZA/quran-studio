@@ -124,20 +124,53 @@ codebase is needed.
 
 The web build is a static SPA, so it also runs on Cloudflare Workers via
 **static assets** (`wrangler.toml` — no Worker code required).
+`wrangler.toml` sets `not_found_handling = "single-page-application"`,
+so deep links fall back to `index.html`.
+
+`VITE_PIXABAY_API_KEY` is baked into the bundle at **build time** — it
+must be present wherever the build runs, otherwise the Image/Video
+background tabs will be empty.
+
+### Option A — Dashboard, git-connected (recommended)
+
+Every push to `master` builds and deploys automatically. One-time setup:
+
+1. Cloudflare dashboard → **Workers & Pages → Create → Connect to Git**
+   (a.k.a. "Import from Git").
+2. Authorize GitHub if asked, select **`DashingMZA/quran-studio`**.
+3. Configure the build (field-by-field):
+
+   | Field | Value |
+   |---|---|
+   | Project name | `quran-studio` (matches `wrangler.toml`) |
+   | Production branch | **`master`** (this repo's default branch) |
+   | Root directory | `/` (repository root — leave default) |
+   | Build command | `pnpm build` (dependency install is automatic via `pnpm-lock.yaml`) |
+   | Deploy command | `npx wrangler deploy` (leave default) |
+
+4. **Before the first deploy**, add build variables under
+   **Settings → Variables** (or on the setup screen):
+
+   | Variable | Value | Why |
+   |---|---|---|
+   | `NODE_VERSION` | `24` | `package.json` requires Node ≥ 24 |
+   | `PNPM_VERSION` | `12.9.1` | matches the repo's pnpm pin |
+   | `VITE_PIXABAY_API_KEY` | your key | baked into the bundle at build time |
+
+   (`.node-version` = `24` is also committed at the repo root as a
+   fallback signal.)
+5. **Save and Deploy.** The site goes live at
+   `https://quran-studio.<your-subdomain>.workers.dev`.
+6. Custom domain (optional): Worker's **Settings → Domains & Routes**.
+
+### Option B — CLI from your machine
 
 ```bash
 pnpm exec wrangler login   # one-time, opens a browser window
 pnpm deploy:cf             # runs pnpm build first, then wrangler deploy
 ```
 
-- Publishes to `https://quran-studio.<your-subdomain>.workers.dev`.
-- `VITE_PIXABAY_API_KEY` is baked in at **build time**: export it in your
-  shell (or `.env`) before running `pnpm deploy:cf`. For git-connected
-  deploys (Workers Builds), set it as a build-time variable in the
-  Cloudflare dashboard (project **Settings → Variables**).
-- `wrangler.toml` sets `not_found_handling = "single-page-application"`,
-  so deep links fall back to `index.html`.
-- Custom domain: Worker's **Settings → Domains & Routes**.
+Export `VITE_PIXABAY_API_KEY` in your shell (or `.env`) before building.
 
 ## 5. Checklist before tagging
 

@@ -227,23 +227,15 @@ deploys to Workers as **static assets** — see `wrangler.toml`. No Worker
 script is needed; Cloudflare serves `./dist` directly at the edge, with
 `single-page-application` fallback to `index.html`.
 
-```bash
-# One-time login (opens a browser window)
-pnpm exec wrangler login
+**Dashboard, git-connected (recommended):** Workers & Pages → Create →
+Connect to Git → select `DashingMZA/quran-studio`. Production branch =
+**`master`**, build command = `pnpm build`, deploy command =
+`npx wrangler deploy`. Add build variables `NODE_VERSION=24`,
+`PNPM_VERSION=12.9.1`, and `VITE_PIXABAY_API_KEY` before the first deploy.
 
-# Build + deploy (predeploy:cf runs pnpm build first)
-pnpm deploy:cf
-```
+**CLI:** `pnpm exec wrangler login` (one-time), then `pnpm deploy:cf`.
 
-This publishes to `https://quran-studio.<your-subdomain>.workers.dev`.
-For git-connected deploys, use Cloudflare's **Workers Builds** (Workers &
-Pages → Create → Connect to Git): it reads `wrangler.toml` automatically —
-no output-directory field to fill in. Set `VITE_PIXABAY_API_KEY` under the
-project's **Settings → Variables** (as a build-time variable) so it is
-present when Cloudflare runs the build.
-
-A custom domain can be attached later under the Worker's
-**Settings → Domains & Routes**.
+Full step-by-step: [release.md](./release.md#4-web-deploy--cloudflare-workers-alternative-to-vercel).
 
 ---
 
