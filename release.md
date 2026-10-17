@@ -120,7 +120,26 @@ The app detects Tauri vs. web at runtime
 output runs on Vercel and inside the desktop shell — no separate web
 codebase is needed.
 
-## 4. Checklist before tagging
+## 4. Web deploy — Cloudflare Workers (alternative to Vercel)
+
+The web build is a static SPA, so it also runs on Cloudflare Workers via
+**static assets** (`wrangler.toml` — no Worker code required).
+
+```bash
+pnpm exec wrangler login   # one-time, opens a browser window
+pnpm deploy:cf             # runs pnpm build first, then wrangler deploy
+```
+
+- Publishes to `https://quran-studio.<your-subdomain>.workers.dev`.
+- `VITE_PIXABAY_API_KEY` is baked in at **build time**: export it in your
+  shell (or `.env`) before running `pnpm deploy:cf`. For git-connected
+  deploys (Workers Builds), set it as a build-time variable in the
+  Cloudflare dashboard (project **Settings → Variables**).
+- `wrangler.toml` sets `not_found_handling = "single-page-application"`,
+  so deep links fall back to `index.html`.
+- Custom domain: Worker's **Settings → Domains & Routes**.
+
+## 5. Checklist before tagging
 
 - [ ] Versions bumped in all four files (§1)
 - [ ] `pnpm install` clean, `pnpm-lock.yaml` committed

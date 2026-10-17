@@ -32,7 +32,9 @@
     "prepare:ffmpeg": "node scripts/fetch-ffmpeg.mjs && node scripts/prepare-ffmpeg.mjs",
     "app:icon": "tauri icon",
     "app:dev": "pnpm prepare:ffmpeg && tauri dev",
-    "app:build": "pnpm prepare:ffmpeg && tauri build"
+    "app:build": "pnpm prepare:ffmpeg && tauri build",
+    "predeploy:cf": "pnpm build",
+    "deploy:cf": "wrangler deploy"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.12.3",
@@ -71,7 +73,8 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.2",
     "vite": "^8.3.4",
-    "vitest": "^5.0.5"
+    "vitest": "^5.0.5",
+    "wrangler": "^4.151.0"
   },
   "type": "module",
   "packageManager": "pnpm@12.9.1",

@@ -148,7 +148,12 @@ pnpm fetch:ffmpeg       # download platform ffmpeg/ffprobe → src-tauri/binarie
 pnpm prepare:ffmpeg     # fetch + rename to Tauri sidecar names
 pnpm app:dev            # prepare:ffmpeg && tauri dev   (needs Rust + webview deps)
 pnpm app:build          # prepare:ffmpeg && tauri build (needs Rust + webview deps)
+pnpm deploy:cf          # pnpm build && wrangler deploy → Cloudflare Workers (static assets)
 ```
+
+Web targets: `vercel.json` (Vercel, Vite preset) and `wrangler.toml`
+(Cloudflare Workers static assets, SPA fallback). `VITE_PIXABAY_API_KEY`
+is baked in at build time — set before building/deploying.
 
 Environment: copy `.env.example` → `.env`. Only `VITE_PIXABAY_API_KEY`
 matters for web. Tauri signing vars (`TAURI_SIGNING_PRIVATE_KEY[...]`)
@@ -365,8 +370,9 @@ mediabunny, Vercel section), `.env.example` placeholder, new
 ## 15. Important References
 
 - `package.json` — scripts, deps, pnpm pin
-- `src-tauri/tauri.conf.json` — installer/updater metadata (needs cleanup)
+- `src-tauri/tauri.conf.json` — installer/updater metadata
 - `.github/workflows/release.yml` — desktop release pipeline
+- `wrangler.toml` / `vercel.json` — web deploy targets (Cloudflare / Vercel)
 - `scripts/fetch-ffmpeg.mjs`, `scripts/prepare-ffmpeg.mjs` — sidecars
 - `src/shared/constants/index.ts` — reciters, fonts, canvas sizes
 - `src/features/video-editor/hooks/useVideoExporter.ts` — export core

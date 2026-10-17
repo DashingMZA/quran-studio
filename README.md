@@ -201,17 +201,49 @@ GitHub Release with all artifacts and the updater manifest (`latest.json`).
 Full step-by-step guide — signing keys, GitHub Secrets, triggering a
 release: see **[release.md](./release.md)**.
 
-## ☁️ Web Deployment (Vercel)
+## ☁️ Web Deployment
 
-The web version is a static Vite SPA and deploys to Vercel with zero config:
+The web version is a static Vite SPA — the same `dist/` build runs on
+Vercel, Cloudflare Workers, or any static host. The app detects Tauri vs.
+web at runtime (`src/shared/utils/platform.ts`), so the identical build
+output runs everywhere.
+
+**Important:** `VITE_PIXABAY_API_KEY` is baked into the bundle at build
+time. Set it in your `.env` (local/CLI deploys) or in the hosting
+dashboard's build environment (git-connected deploys) *before* building,
+otherwise the Image/Video background tabs will be empty.
+
+### Vercel
 
 1. Import the repository in Vercel — the framework is auto-detected as **Vite**.
 2. Build command `pnpm build`, output directory `dist` (already set in `vercel.json`).
 3. Add the environment variable `VITE_PIXABAY_API_KEY` in the Vercel dashboard
-   (Project Settings → Environment Variables) so the background tabs work.
+   (Project Settings → Environment Variables).
 
-The app detects Tauri vs. web at runtime (`src/shared/utils/platform.ts`),
-so the same build runs on Vercel and inside the desktop shell.
+### Cloudflare Workers
+
+The app is a pure client-side SPA (no server code, no database), so it
+deploys to Workers as **static assets** — see `wrangler.toml`. No Worker
+script is needed; Cloudflare serves `./dist` directly at the edge, with
+`single-page-application` fallback to `index.html`.
+
+```bash
+# One-time login (opens a browser window)
+pnpm exec wrangler login
+
+# Build + deploy (predeploy:cf runs pnpm build first)
+pnpm deploy:cf
+```
+
+This publishes to `https://quran-studio.<your-subdomain>.workers.dev`.
+For git-connected deploys, use Cloudflare's **Workers Builds** (Workers &
+Pages → Create → Connect to Git): it reads `wrangler.toml` automatically —
+no output-directory field to fill in. Set `VITE_PIXABAY_API_KEY` under the
+project's **Settings → Variables** (as a build-time variable) so it is
+present when Cloudflare runs the build.
+
+A custom domain can be attached later under the Worker's
+**Settings → Domains & Routes**.
 
 ---
 
