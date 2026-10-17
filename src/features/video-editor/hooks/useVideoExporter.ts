@@ -32,15 +32,15 @@ export function useVideoExporter(
     setVideoExportProgress(0);
     setExportStatus("Initializing...");
 
-      // Dynamic import so the rest of the app still loads if mediabunny fails
-      const {
-        Output,
-        Mp4OutputFormat,
-        BufferTarget,
-        EncodedVideoPacketSource,
-        EncodedAudioPacketSource,
-        EncodedPacket,
-      } = await import("mediabunny");
+    // Dynamic import so the rest of the app still loads if mediabunny fails
+    const {
+      Output,
+      Mp4OutputFormat,
+      BufferTarget,
+      EncodedVideoPacketSource,
+      EncodedAudioPacketSource,
+      EncodedPacket,
+    } = await import("mediabunny");
 
     try {
       // 1. Calculate Timing
@@ -86,10 +86,7 @@ export function useVideoExporter(
       // 3. Setup Video Encoder
       const videoEncoder = new VideoEncoder({
         output: async (chunk, meta) => {
-          await videoSource.add(
-            EncodedPacket.fromEncodedChunk(chunk),
-            meta,
-          );
+          await videoSource.add(EncodedPacket.fromEncodedChunk(chunk), meta);
         },
         error: (e) => console.error("Video Encoder Error", e),
       });
@@ -105,10 +102,7 @@ export function useVideoExporter(
       // 4. Setup Audio Encoder
       const audioEncoder = new AudioEncoder({
         output: async (chunk, meta) => {
-          await audioSource.add(
-            EncodedPacket.fromEncodedChunk(chunk),
-            meta,
-          );
+          await audioSource.add(EncodedPacket.fromEncodedChunk(chunk), meta);
         },
         error: (e) => console.error("Audio Encoder Error", e),
       });

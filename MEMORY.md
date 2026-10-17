@@ -112,19 +112,19 @@ api.quran.com (in-memory `Map` cache) → `VideoCanvas` renders frames →
 
 Verified from `package.json` / lockfile / configs (2026-10-16):
 
-| Item | Version | Notes |
-|---|---|---|
-| pnpm | 12.9.1 (pinned via `packageManager`) | ONLY package manager; `pnpm-lock.yaml` is the lockfile |
-| node | >= 24 (`engines`) | Sandbox ran 24.20.0 |
-| react / react-dom | 19.3.1 | Ref types are `RefObject<T \| null>` |
-| vite | 8.3.4 | dev port 3000 |
-| typescript | 6.0.3 | `strict`, `noUnusedLocals/Parameters` |
-| tailwindcss | 3.4.x | v3 config style; v4 upgrade is breaking (open PR) |
-| @tauri-apps/api etc. | 2.12.x / 2.7.x | Tauri 2 |
-| mediabunny | 1.61.6 | MP4 muxing (successor of mp4-muxer) |
-| lucide-react | 1.58.0 | **No brand icons** — use `public/social_media/*.svg` |
-| vitest | 5.0.5 + jsdom | Configured; zero test files |
-| @types/node | ^24.19.2 | Added during pnpm migration |
+| Item                 | Version                              | Notes                                                  |
+| -------------------- | ------------------------------------ | ------------------------------------------------------ |
+| pnpm                 | 12.9.1 (pinned via `packageManager`) | ONLY package manager; `pnpm-lock.yaml` is the lockfile |
+| node                 | >= 24 (`engines`)                    | Sandbox ran 24.20.0                                    |
+| react / react-dom    | 19.3.1                               | Ref types are `RefObject<T \| null>`                   |
+| vite                 | 8.3.4                                | dev port 3000                                          |
+| typescript           | 6.0.3                                | `strict`, `noUnusedLocals/Parameters`                  |
+| tailwindcss          | 3.4.x                                | v3 config style; v4 upgrade is breaking (open PR)      |
+| @tauri-apps/api etc. | 2.12.x / 2.7.x                       | Tauri 2                                                |
+| mediabunny           | 1.61.6                               | MP4 muxing (successor of mp4-muxer)                    |
+| lucide-react         | 1.58.0                               | **No brand icons** — use `public/social_media/*.svg`   |
+| vitest               | 5.0.5 + jsdom                        | Configured; zero test files                            |
+| @types/node          | ^24.19.2                             | Added during pnpm migration                            |
 
 Constraints: pnpm strict resolution (declare every direct import);
 `tsconfig.json` `"types": ["vite/client", "dom-webcodecs"]` — the
@@ -196,6 +196,7 @@ installers + updater artifacts.
 ## 7. Completed Work
 
 ### 2026-10-16 — Repository review (round 1)
+
 - **Objective:** thoroughly check the repo at owner's request.
 - **Findings (all evidence-backed):** app purpose/stack identified; 10 TS
   errors found (`pnpm`/`npm` typecheck); `tauri.conf.json` contained
@@ -212,6 +213,7 @@ installers + updater artifacts.
   icons).
 
 ### 2026-10-16 — TypeScript fixes (uncommitted)
+
 - **Objective:** fix the 10 typecheck errors.
 - **Implementation:** widened ref prop/param types to
   `React.RefObject<HTMLCanvasElement | null>` /
@@ -222,7 +224,7 @@ installers + updater artifacts.
   `features/audio/hooks/useAudioRecorder.ts`,
   `features/audio/components/CustomAudioStudio.tsx`
   (`LiveAudioVisualizer` props); replaced lucide `Github/Linkedin/
-  Twitter/Instagram` imports in `shared/components/AboutOverlay.tsx`
+Twitter/Instagram` imports in `shared/components/AboutOverlay.tsx`
   with a `SOCIAL_SVG` map rendering `public/social_media/*.svg`;
   downloaded `linkedin.svg`, `tiktok.svg`, `x.svg` from simple-icons
   (jsDelivr) and normalized all six brand SVGs to `fill="currentColor"`.
@@ -232,6 +234,7 @@ installers + updater artifacts.
   error surfaced (see §9, `dom-webcodecs`).
 
 ### 2026-10-16 — pnpm migration (uncommitted, in progress)
+
 - **Objective:** switch repo from npm to pnpm per owner directive.
 - **Implementation:** `package.json`: added
   `"packageManager": "pnpm@12.9.1"`, `"engines": {"node": ">=24"}`,
@@ -247,6 +250,7 @@ installers + updater artifacts.
   migration landed — the workflow was written ahead of the repo state.
 
 ### 2026-10-16 — Owner-side commits (remote, by DashingMZA)
+
 - `316f145`, `144f28c`, `0b7fd81`, `69a81ab` ("1.0.0"): added
   `.github/workflows/release.yml`; fixed tauri `shortDescription`/
   `longDescription` to Quran Studio wording and removed the stray
@@ -263,7 +267,8 @@ publisher `DashingMZA`, GPL copyright), `release.yml` "Jadoo" →
 "Quran Studio", README rewrite (conflicts removed, React 19/pnpm/
 mediabunny, Vercel section), `.env.example` placeholder, new
 `vercel.json`, `release.md`, smoke test file. Remaining: single commit
-+ push (owner's standing directive: push-after-verified in one commit).
+
+- push (owner's standing directive: push-after-verified in one commit).
 
 ## 9. Bugs and Troubleshooting
 
@@ -295,7 +300,7 @@ mediabunny, Vercel section), `.env.example` placeholder, new
 ## 10. Failed Attempts and Lessons Learned
 
 - **npm-first verification:** the repo was first checked with `npm
-  install`; npm rewrote `package-lock.json` as a side effect (had to be
+install`; npm rewrote `package-lock.json` as a side effect (had to be
   `git checkout`ed). Lesson: match the repo's intended package manager
   before installing — now pnpm-only.
 - **pnpm 12 flag drift:** `pnpm install --no-fund` is rejected in pnpm 12
@@ -306,17 +311,17 @@ mediabunny, Vercel section), `.env.example` placeholder, new
 
 ## 11. Testing and Quality Status
 
-| Check | Status (2026-10-16) | Notes |
-|---|---|---|
-| `pnpm install` | PASS | pnpm-lock.yaml generated (458 entries) |
-| `pnpm typecheck` | PASS | |
-| `pnpm build` | PASS | tsc + vite build, dist/ emitted |
-| `pnpm lint` | PASS | 2 react-hooks errors fixed |
-| `pnpm test` | PASS | 4/4, new constants.test.ts |
-| `pnpm dev` / `preview` smoke | PASS | HTTP 200, correct title |
-| `tauri info` / fetch-ffmpeg | PASS | CLI 2.12.3, config valid, binaries download |
-| `pnpm app:dev` / `app:build` native compile | BLOCKED | No Rust toolchain / webview deps in sandbox |
-| release.yml end-to-end | NOT RUN | Needs a `v*` tag push + signing secrets |
+| Check                                       | Status (2026-10-16) | Notes                                       |
+| ------------------------------------------- | ------------------- | ------------------------------------------- |
+| `pnpm install`                              | PASS                | pnpm-lock.yaml generated (458 entries)      |
+| `pnpm typecheck`                            | PASS                |                                             |
+| `pnpm build`                                | PASS                | tsc + vite build, dist/ emitted             |
+| `pnpm lint`                                 | PASS                | 2 react-hooks errors fixed                  |
+| `pnpm test`                                 | PASS                | 4/4, new constants.test.ts                  |
+| `pnpm dev` / `preview` smoke                | PASS                | HTTP 200, correct title                     |
+| `tauri info` / fetch-ffmpeg                 | PASS                | CLI 2.12.3, config valid, binaries download |
+| `pnpm app:dev` / `app:build` native compile | BLOCKED             | No Rust toolchain / webview deps in sandbox |
+| release.yml end-to-end                      | NOT RUN             | Needs a `v*` tag push + signing secrets     |
 
 ## 12. Security and Operational Considerations
 

@@ -11,7 +11,6 @@ import VideoCanvas from "../features/video-editor/components/VideoCanvas";
 import DesktopControls from "../shared/components/DesktopControls";
 import AboutOverlay from "../shared/components/AboutOverlay";
 
-
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
   { error: Error | null }
@@ -23,7 +22,14 @@ class ErrorBoundary extends React.Component<
   render() {
     if (this.state.error) {
       return (
-        <div style={{ padding: 24, background: "#09090b", color: "#f4f4f5", minHeight: "100vh" }}>
+        <div
+          style={{
+            padding: 24,
+            background: "#09090b",
+            color: "#f4f4f5",
+            minHeight: "100vh",
+          }}
+        >
           <h1 style={{ color: "#f87171" }}>UI Error</h1>
           <pre style={{ whiteSpace: "pre-wrap" }}>
             {this.state.error.message}
@@ -153,144 +159,146 @@ export default function App() {
 
   return (
     <ErrorBoundary>
+      <div className="flex flex-col md:flex-row h-screen bg-studio-bg text-studio-text overflow-hidden font-sans">
+        <DesktopControls />
 
-    <div className="flex flex-col md:flex-row h-screen bg-studio-bg text-studio-text overflow-hidden font-sans">
-      <DesktopControls />
-
-      {/* Hidden Font Preloader hack */}
-      <div
-        style={{
-          fontFamily: "SurahNames",
-          position: "absolute",
-          opacity: 0,
-          pointerEvents: "none",
-          zIndex: -1,
-        }}
-      >
-        s001 s114
-      </div>
-
-      {/* LEFT SIDEBAR */}
-      <LeftSidebar
-        config={config}
-        setConfig={setConfig}
-        errorMsg={errorMsg}
-        currentSurah={currentSurah}
-        filteredSurahs={filteredSurahs}
-        isSurahOpen={isSurahOpen}
-        setIsSurahOpen={setIsSurahOpen}
-        surahSearch={surahSearch}
-        setSurahSearch={setSurahSearch}
-        verses={verses}
-        onRandomBackground={triggerRandomBackground}
-      />
-
-      {/* PREVIEW AREA */}
-      <div className="flex-1 flex flex-col items-center justify-center bg-[#050505] relative p-8">
-        <VideoCanvas
-          canvasRef={canvasRef}
-          config={config}
-          verses={verses}
-          currentVerseIndex={currentVerseIndex}
-          audioRef={audioRef}
-          renderFrameAtTimeRef={renderFrameAtTimeRef}
-          checkTime={checkTime}
-          isLoading={isLoading}
-          isExporting={isAnyExporting} // Disable interactions during exports
-          loadingProgress={loadingProgress}
-        />
-
-        {/* CONTROLS */}
-        <div className="mt-8 flex items-center gap-6 z-20">
-          <button
-            onClick={togglePlay}
-            disabled={isAnyExporting || isLoading || verses.length === 0}
-            className="w-16 h-16 rounded-full bg-studio-panel border border-studio-border flex items-center justify-center hover:bg-studio-accent hover:border-studio-accent hover:text-white hover:scale-105 hover:shadow-[0_0_20px_var(--color-qdc-blue)] active:scale-[0.96] transition-[transform,background-color,border-color,color,box-shadow] disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-studio-panel disabled:hover:cursor-not-allowed group relative text-studio-text"
-          >
-            {/* Spinner Overlay */}
-            {isBuffering && (
-              <div className="absolute inset-0 flex items-center justify-center bg-studio-panel/80 rounded-full z-10">
-                <Loader2 className="w-6 h-6 text-studio-accent animate-spin" />
-              </div>
-            )}
-
-            {isPlaying ? (
-              <Pause className="w-6 h-6 fill-current group-hover:fill-white" />
-            ) : (
-              <Play className="w-6 h-6 fill-current ml-1 group-hover:fill-white" />
-            )}
-          </button>
-
-          {/* High Quality MP4 Export */}
-          <button
-            onClick={startVideoExport}
-            disabled={
-              isAnyExporting || isLoading || verses.length === 0 || isBuffering
-            }
-            className="flex items-center gap-3 px-8 py-5 bg-studio-accent hover:bg-studio-accentHover text-white rounded-full font-bold shadow-[0_0_25px_var(--color-qdc-blue)] hover:shadow-[0_0_35px_var(--color-qdc-blue)] transition-[transform,background-color,box-shadow] transform hover:scale-105 active:scale-[0.96] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
-          >
-            {isVideoExporting ? (
-              <Loader2 className="w-5 h-5 animate-spin" />
-            ) : (
-              <Film className="w-5 h-5" />
-            )}
-            <span className="tracking-wide">EXPORT VIDEO</span>
-          </button>
-
-          {/* Settings Button */}
-          <button
-            onClick={() => setIsSettingsOpen(true)}
-            disabled={isAnyExporting}
-            className="w-14 h-14 rounded-full bg-studio-panel border border-studio-border flex items-center justify-center hover:bg-zinc-700 hover:border-zinc-600 hover:text-white hover:scale-105 active:scale-[0.96] transition-[transform,background-color,border-color,color] disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-studio-panel disabled:hover:cursor-not-allowed text-studio-textMuted"
-          >
-            <Settings className="w-6 h-6" />
-          </button>
+        {/* Hidden Font Preloader hack */}
+        <div
+          style={{
+            fontFamily: "SurahNames",
+            position: "absolute",
+            opacity: 0,
+            pointerEvents: "none",
+            zIndex: -1,
+          }}
+        >
+          s001 s114
         </div>
 
-        {/* HQ Video Export Progress Overlay */}
-        {isVideoExporting && (
-          <div
-            dir="ltr"
-            className="absolute inset-0 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center gap-6 z-50"
-          >
-            <div className="relative">
-              <div className="w-24 h-24 border-4 border-studio-panel border-t-studio-accent rounded-full animate-spin"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-sm font-bold text-white tabular-nums">
-                  {videoExportProgress}%
-                </span>
+        {/* LEFT SIDEBAR */}
+        <LeftSidebar
+          config={config}
+          setConfig={setConfig}
+          errorMsg={errorMsg}
+          currentSurah={currentSurah}
+          filteredSurahs={filteredSurahs}
+          isSurahOpen={isSurahOpen}
+          setIsSurahOpen={setIsSurahOpen}
+          surahSearch={surahSearch}
+          setSurahSearch={setSurahSearch}
+          verses={verses}
+          onRandomBackground={triggerRandomBackground}
+        />
+
+        {/* PREVIEW AREA */}
+        <div className="flex-1 flex flex-col items-center justify-center bg-[#050505] relative p-8">
+          <VideoCanvas
+            canvasRef={canvasRef}
+            config={config}
+            verses={verses}
+            currentVerseIndex={currentVerseIndex}
+            audioRef={audioRef}
+            renderFrameAtTimeRef={renderFrameAtTimeRef}
+            checkTime={checkTime}
+            isLoading={isLoading}
+            isExporting={isAnyExporting} // Disable interactions during exports
+            loadingProgress={loadingProgress}
+          />
+
+          {/* CONTROLS */}
+          <div className="mt-8 flex items-center gap-6 z-20">
+            <button
+              onClick={togglePlay}
+              disabled={isAnyExporting || isLoading || verses.length === 0}
+              className="w-16 h-16 rounded-full bg-studio-panel border border-studio-border flex items-center justify-center hover:bg-studio-accent hover:border-studio-accent hover:text-white hover:scale-105 hover:shadow-[0_0_20px_var(--color-qdc-blue)] active:scale-[0.96] transition-[transform,background-color,border-color,color,box-shadow] disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-studio-panel disabled:hover:cursor-not-allowed group relative text-studio-text"
+            >
+              {/* Spinner Overlay */}
+              {isBuffering && (
+                <div className="absolute inset-0 flex items-center justify-center bg-studio-panel/80 rounded-full z-10">
+                  <Loader2 className="w-6 h-6 text-studio-accent animate-spin" />
+                </div>
+              )}
+
+              {isPlaying ? (
+                <Pause className="w-6 h-6 fill-current group-hover:fill-white" />
+              ) : (
+                <Play className="w-6 h-6 fill-current ml-1 group-hover:fill-white" />
+              )}
+            </button>
+
+            {/* High Quality MP4 Export */}
+            <button
+              onClick={startVideoExport}
+              disabled={
+                isAnyExporting ||
+                isLoading ||
+                verses.length === 0 ||
+                isBuffering
+              }
+              className="flex items-center gap-3 px-8 py-5 bg-studio-accent hover:bg-studio-accentHover text-white rounded-full font-bold shadow-[0_0_25px_var(--color-qdc-blue)] hover:shadow-[0_0_35px_var(--color-qdc-blue)] transition-[transform,background-color,box-shadow] transform hover:scale-105 active:scale-[0.96] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
+            >
+              {isVideoExporting ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <Film className="w-5 h-5" />
+              )}
+              <span className="tracking-wide">EXPORT VIDEO</span>
+            </button>
+
+            {/* Settings Button */}
+            <button
+              onClick={() => setIsSettingsOpen(true)}
+              disabled={isAnyExporting}
+              className="w-14 h-14 rounded-full bg-studio-panel border border-studio-border flex items-center justify-center hover:bg-zinc-700 hover:border-zinc-600 hover:text-white hover:scale-105 active:scale-[0.96] transition-[transform,background-color,border-color,color] disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-studio-panel disabled:hover:cursor-not-allowed text-studio-textMuted"
+            >
+              <Settings className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* HQ Video Export Progress Overlay */}
+          {isVideoExporting && (
+            <div
+              dir="ltr"
+              className="absolute inset-0 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center gap-6 z-50"
+            >
+              <div className="relative">
+                <div className="w-24 h-24 border-4 border-studio-panel border-t-studio-accent rounded-full animate-spin"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-sm font-bold text-white tabular-nums">
+                    {videoExportProgress}%
+                  </span>
+                </div>
+              </div>
+              <div className="text-center space-y-2">
+                <h3 className="text-2xl font-bold text-white bg-gradient-to-r from-studio-accent to-emerald-400 bg-clip-text text-transparent">
+                  Rendering HD Video
+                </h3>
+                <p className="text-sm text-studio-textMuted max-w-xs mx-auto">
+                  {exportStatus}
+                  <br />
+                  <span className="text-xs opacity-70">
+                    Creating frame-perfect MP4 (H.264/AAC)
+                  </span>
+                </p>
               </div>
             </div>
-            <div className="text-center space-y-2">
-              <h3 className="text-2xl font-bold text-white bg-gradient-to-r from-studio-accent to-emerald-400 bg-clip-text text-transparent">
-                Rendering HD Video
-              </h3>
-              <p className="text-sm text-studio-textMuted max-w-xs mx-auto">
-                {exportStatus}
-                <br />
-                <span className="text-xs opacity-70">
-                  Creating frame-perfect MP4 (H.264/AAC)
-                </span>
-              </p>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
+
+        {/* RIGHT SIDEBAR */}
+        <RightSidebar
+          config={config}
+          setConfig={setConfig}
+          typoTab={typoTab}
+          setTypoTab={setTypoTab}
+          onRandomBackground={handleRandomBackground}
+        />
+
+        <AboutOverlay
+          isOpen={isSettingsOpen}
+          onClose={() => setIsSettingsOpen(false)}
+        />
       </div>
-
-      {/* RIGHT SIDEBAR */}
-      <RightSidebar
-        config={config}
-        setConfig={setConfig}
-        typoTab={typoTab}
-        setTypoTab={setTypoTab}
-        onRandomBackground={handleRandomBackground}
-      />
-
-      <AboutOverlay
-        isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)}
-      />
-    </div>
     </ErrorBoundary>
   );
 }

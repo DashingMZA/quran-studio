@@ -1,6 +1,5 @@
 const PIXABAY_API_KEY = import.meta.env.VITE_PIXABAY_API_KEY as
-  | string
-  | undefined;
+  string | undefined;
 
 export const PIXABAY_TOPICS = [
   "ocean",

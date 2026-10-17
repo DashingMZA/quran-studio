@@ -24,15 +24,18 @@ The app is built with React, Vite, TypeScript, Tailwind CSS, pnpm, and Tauri.
 ## ✨ Features
 
 ### 📖 Content Selection
+
 - **Surah & Verse Navigation** - Easily browse and select any Surah and verse range
 - **Multiple Reciters** - Choose from renowned Quran reciters with high-quality audio
 
 ### 🎵 Audio Tools
+
 - **Waveform Visualization** - See your audio in real-time
 - **Playback Controls** - Full control over audio timing and synchronization
 - **Audio Synchronization** - Perfectly aligned audio with text display
 
 ### 🎨 Video Customization
+
 - **Typography** - Multiple Arabic and English font options
 - **Color Control** - Customize text colors, backgrounds, and highlighting
 - **Background Support** - Solid colors or custom uploaded images
@@ -40,6 +43,7 @@ The app is built with React, Vite, TypeScript, Tailwind CSS, pnpm, and Tauri.
 - **Aspect Ratios** - `9:16` (Story/TikTok), `1:1` (Instagram), `16:9` (YouTube)
 
 ### 💾 Export & Production
+
 - **MP4 Export** - High-quality video generation
 - **Client-Side Processing** - Fast processing with `mediabunny` (WebCodecs)
 - **No Server Upload** - Your videos stay private
@@ -48,16 +52,16 @@ The app is built with React, Vite, TypeScript, Tailwind CSS, pnpm, and Tauri.
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| **Frontend Framework** | React 19 + TypeScript |
-| **Build Tool** | Vite |
-| **Package Manager** | pnpm 12 (`packageManager` pinned) |
-| **Styling** | Tailwind CSS |
-| **Icons** | Lucide React |
-| **Video Processing** | mediabunny |
-| **State Management** | React Hooks |
-| **Desktop (Optional)** | Tauri 2.0 |
+| Layer                  | Technology                        |
+| ---------------------- | --------------------------------- |
+| **Frontend Framework** | React 19 + TypeScript             |
+| **Build Tool**         | Vite                              |
+| **Package Manager**    | pnpm 12 (`packageManager` pinned) |
+| **Styling**            | Tailwind CSS                      |
+| **Icons**              | Lucide React                      |
+| **Video Processing**   | mediabunny                        |
+| **State Management**   | React Hooks                       |
+| **Desktop (Optional)** | Tauri 2.0                         |
 
 ---
 
@@ -210,7 +214,7 @@ output runs everywhere.
 
 **Important:** `VITE_PIXABAY_API_KEY` is baked into the bundle at build
 time. Set it in your `.env` (local/CLI deploys) or in the hosting
-dashboard's build environment (git-connected deploys) *before* building,
+dashboard's build environment (git-connected deploys) _before_ building,
 otherwise the Image/Video background tabs will be empty.
 
 ### Vercel

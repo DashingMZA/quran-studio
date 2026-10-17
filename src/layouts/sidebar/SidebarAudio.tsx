@@ -125,13 +125,13 @@ export default function SidebarAudio({
       </div>
 
       <Suspense fallback={null}>
-      <CustomAudioStudio
-        isOpen={isStudioOpen}
-        onClose={() => setIsStudioOpen(false)}
-        config={config}
-        setConfig={setConfig}
-        verses={verses}
-      />
+        <CustomAudioStudio
+          isOpen={isStudioOpen}
+          onClose={() => setIsStudioOpen(false)}
+          config={config}
+          setConfig={setConfig}
+          verses={verses}
+        />
       </Suspense>
     </div>
   );

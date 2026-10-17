@@ -85,7 +85,9 @@ export default function AboutOverlay({ isOpen, onClose }: AboutOverlayProps) {
     const getSocialIcon = (platform: string) => {
       const src = SOCIAL_SVG[platform];
       if (src)
-        return <img src={src} alt={platform} className="w-4 h-4" draggable={false} />;
+        return (
+          <img src={src} alt={platform} className="w-4 h-4" draggable={false} />
+        );
       return <Info size={16} />;
     };
 

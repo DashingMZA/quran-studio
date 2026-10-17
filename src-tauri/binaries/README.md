@@ -28,12 +28,12 @@ npm run app:build   # automatically prepare:ffmpeg karke tauri build
 
 Agar aap khud binaries rakhna chahte ho to yeh naam use karein:
 
-| Platform              | Plain name (script ke liye) | Final name (Tauri ke liye)                  |
-|-----------------------|-----------------------------|---------------------------------------------|
-| Windows x64           | `ffmpeg.exe`                | `ffmpeg-x86_64-pc-windows-msvc.exe`         |
-| Linux x64             | `ffmpeg`                    | `ffmpeg-x86_64-unknown-linux-gnu`           |
-| macOS Apple Silicon   | `ffmpeg`                    | `ffmpeg-aarch64-apple-darwin`               |
-| macOS Intel           | `ffmpeg`                    | `ffmpeg-x86_64-apple-darwin`                |
+| Platform            | Plain name (script ke liye) | Final name (Tauri ke liye)          |
+| ------------------- | --------------------------- | ----------------------------------- |
+| Windows x64         | `ffmpeg.exe`                | `ffmpeg-x86_64-pc-windows-msvc.exe` |
+| Linux x64           | `ffmpeg`                    | `ffmpeg-x86_64-unknown-linux-gnu`   |
+| macOS Apple Silicon | `ffmpeg`                    | `ffmpeg-aarch64-apple-darwin`       |
+| macOS Intel         | `ffmpeg`                    | `ffmpeg-x86_64-apple-darwin`        |
 
 Same pattern `ffprobe` ke liye bhi.
 

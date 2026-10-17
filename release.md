@@ -7,12 +7,12 @@ macOS / Linux via GitHub Actions) and the web deployment (Vercel).
 
 Keep these four in sync before tagging a release:
 
-| File | Field |
-|------|-------|
-| `package.json` | `"version"` |
-| `src-tauri/tauri.conf.json` | `"version"` |
-| `src-tauri/Cargo.toml` | `version` under `[package]` |
-| `src/config/app-info.json` | `"version"` (displayed in the About overlay, e.g. `"v1.0.0"`) |
+| File                        | Field                                                         |
+| --------------------------- | ------------------------------------------------------------- |
+| `package.json`              | `"version"`                                                   |
+| `src-tauri/tauri.conf.json` | `"version"`                                                   |
+| `src-tauri/Cargo.toml`      | `version` under `[package]`                                   |
+| `src/config/app-info.json`  | `"version"` (displayed in the About overlay, e.g. `"v1.0.0"`) |
 
 ## 2. Desktop releases (GitHub Actions)
 
@@ -62,10 +62,10 @@ TAURI_SIGNING_PRIVATE_KEY_PASSWORD=
 
 Repository → **Settings → Secrets and variables → Actions → New repository secret**:
 
-| Secret | Value |
-|--------|-------|
-| `TAURI_SIGNING_PRIVATE_KEY` | Contents (or path contents) of the private `.key` file |
-| `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` | The password set at generation time (empty if none) |
+| Secret                               | Value                                                  |
+| ------------------------------------ | ------------------------------------------------------ |
+| `TAURI_SIGNING_PRIVATE_KEY`          | Contents (or path contents) of the private `.key` file |
+| `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` | The password set at generation time (empty if none)    |
 
 `GITHUB_TOKEN` is provided automatically; the workflow already requests
 `permissions: contents: write` so it can create the release.
@@ -140,25 +140,26 @@ Every push to `master` builds and deploys automatically. One-time setup:
 2. Authorize GitHub if asked, select **`DashingMZA/quran-studio`**.
 3. Configure the build (field-by-field):
 
-   | Field | Value |
-   |---|---|
-   | Project name | `quran-studio` (matches `wrangler.toml`) |
-   | Production branch | **`master`** (this repo's default branch) |
-   | Root directory | `/` (repository root — leave default) |
-   | Build command | `pnpm build` (dependency install is automatic via `pnpm-lock.yaml`) |
-   | Deploy command | `npx wrangler deploy` (leave default) |
+   | Field             | Value                                                               |
+   | ----------------- | ------------------------------------------------------------------- |
+   | Project name      | `quran-studio` (matches `wrangler.toml`)                            |
+   | Production branch | **`master`** (this repo's default branch)                           |
+   | Root directory    | `/` (repository root — leave default)                               |
+   | Build command     | `pnpm build` (dependency install is automatic via `pnpm-lock.yaml`) |
+   | Deploy command    | `npx wrangler deploy` (leave default)                               |
 
 4. **Before the first deploy**, add build variables under
    **Settings → Variables** (or on the setup screen):
 
-   | Variable | Value | Why |
-   |---|---|---|
-   | `NODE_VERSION` | `24` | `package.json` requires Node ≥ 24 |
-   | `PNPM_VERSION` | `12.9.1` | matches the repo's pnpm pin |
+   | Variable               | Value    | Why                                 |
+   | ---------------------- | -------- | ----------------------------------- |
+   | `NODE_VERSION`         | `24`     | `package.json` requires Node ≥ 24   |
+   | `PNPM_VERSION`         | `12.9.1` | matches the repo's pnpm pin         |
    | `VITE_PIXABAY_API_KEY` | your key | baked into the bundle at build time |
 
    (`.node-version` = `24` is also committed at the repo root as a
    fallback signal.)
+
 5. **Save and Deploy.** The site goes live at
    `https://quran-studio.<your-subdomain>.workers.dev`.
 6. Custom domain (optional): Worker's **Settings → Domains & Routes**.
