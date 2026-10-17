@@ -526,3 +526,7 @@ install`; npm rewrote `package-lock.json` as a side effect (had to be
   reporting, supported versions, client-side security model, Pixabay key
   handling (client-visible by design), Tauri signing-key rules, updater
   signature verification, capability least-privilege, supply-chain notes.
+- **2026-10-17:** Owner decision: keep BOTH `wrangler.toml` and
+  `wrangler.jsonc` (both configure the same Worker: name `quran-studio`,
+  static assets `./dist`, SPA fallback). Note: when both exist, Wrangler
+  prefers `wrangler.jsonc`.
