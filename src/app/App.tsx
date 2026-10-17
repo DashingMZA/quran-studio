@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { Play, Pause, Loader2, Film, Settings } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { Play, Pause, Loader2, Film, Settings, Info } from "lucide-react";
 import { VideoConfig } from "../features/video-editor/types";
 import { SURAHS } from "../features/quran/data/surahs";
 import LeftSidebar from "../layouts/LeftSidebar";
@@ -10,6 +10,10 @@ import { useVideoExporter } from "../features/video-editor/hooks/useVideoExporte
 import VideoCanvas from "../features/video-editor/components/VideoCanvas";
 import DesktopControls from "../shared/components/DesktopControls";
 import AboutOverlay from "../shared/components/AboutOverlay";
+import DesktopAboutOverlay from "../shared/components/DesktopAboutOverlay";
+import UpdateBanner from "../shared/components/UpdateBanner";
+import { useAppUpdater } from "../shared/hooks/useAppUpdater";
+import { isTauri } from "../shared/utils/platform";
 
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
@@ -100,6 +104,20 @@ export default function App() {
   const [isSurahOpen, setIsSurahOpen] = useState(false);
   const [surahSearch, setSurahSearch] = useState("");
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const [updateDismissed, setUpdateDismissed] = useState(false);
+  const [isDesktop] = useState(() => isTauri());
+
+  // Desktop-only: check for updates shortly after startup.
+  const updater = useAppUpdater();
+  useEffect(() => {
+    if (!isTauri()) return;
+    const t = setTimeout(() => {
+      updater.checkForUpdates();
+    }, 4000);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Random background callback
   const randomBackgroundRef = useRef<(() => void) | null>(null);
@@ -253,6 +271,18 @@ export default function App() {
             >
               <Settings className="w-6 h-6" />
             </button>
+
+            {/* About Button (desktop app only) */}
+            {isDesktop && (
+              <button
+                onClick={() => setIsAboutOpen(true)}
+                disabled={isAnyExporting}
+                title="About"
+                className="w-14 h-14 rounded-full bg-studio-panel border border-studio-border flex items-center justify-center hover:bg-zinc-700 hover:border-zinc-600 hover:text-white hover:scale-105 active:scale-[0.96] transition-[transform,background-color,border-color,color] disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-studio-panel disabled:hover:cursor-not-allowed text-studio-textMuted"
+              >
+                <Info className="w-6 h-6" />
+              </button>
+            )}
           </div>
 
           {/* HQ Video Export Progress Overlay */}
@@ -298,6 +328,24 @@ export default function App() {
           isOpen={isSettingsOpen}
           onClose={() => setIsSettingsOpen(false)}
         />
+
+        {/* Desktop-only About page (information, version, updates) */}
+        <DesktopAboutOverlay
+          isOpen={isAboutOpen}
+          onClose={() => setIsAboutOpen(false)}
+        />
+
+        {/* Desktop-only update notification (from startup check) */}
+        {!updateDismissed && (
+          <UpdateBanner
+            status={updater.status}
+            updateInfo={updater.updateInfo}
+            progress={updater.progress}
+            error={updater.error}
+            onUpdate={updater.downloadAndInstall}
+            onDismiss={() => setUpdateDismissed(true)}
+          />
+        )}
       </div>
     </ErrorBoundary>
   );

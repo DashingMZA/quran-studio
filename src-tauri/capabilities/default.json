@@ -31,6 +31,8 @@
       ]
     },
     "dialog:default",
+    "updater:default",
+    "process:default",
     "fs:default",
     "fs:allow-exists",
     "fs:allow-mkdir",

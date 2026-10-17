@@ -1,5 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { isTauri } from "./shared/utils/platform";
+
+// The Tauri window starts with `visible: false` (tauri.conf.json) to avoid a
+// white flash — show it as soon as the bundle loads (desktop only).
+if (isTauri()) {
+  import("@tauri-apps/api/window")
+    .then(({ getCurrentWindow }) => getCurrentWindow().show())
+    .catch(() => {});
+}
 
 // Prevent context menu (right-click) globally for native feel
 document.addEventListener("contextmenu", (event) => event.preventDefault());
