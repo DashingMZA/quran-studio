@@ -503,3 +503,7 @@ install`; npm rewrote `package-lock.json` as a side effect (had to be
   visible/show, updater 4-piece wiring, plugin-process, pnpm lockfile
   churn, Git Data API notes). §§2–5, 7–9, 11–14, 16 current; tree clean,
   in sync with remote.
+- **2026-10-16:** `.env.example` signing section rewritten: the Tauri CLI
+  does NOT read `.env` files — `TAURI_SIGNING_PRIVATE_KEY[_PASSWORD]`
+  must be real OS env vars (owner hit "no private key" despite having
+  the path in `.env.local`). Pushed as `0eed45a`.
