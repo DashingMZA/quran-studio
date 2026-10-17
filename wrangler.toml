@@ -1,11 +1,11 @@
-# Cloudflare Workers — static-asset hosting for the Quran Studio web app.
-# No Worker code is needed: Cloudflare serves ./dist directly at the edge.
-# Build first (`pnpm build`), then `pnpm deploy:cf`.
-# (VITE_* env vars are baked in at build time — set them before building.)
-
+"$schema" = "./node_modules/wrangler/config-schema.json"
 name = "quran-studio"
-compatibility_date = "2026-10-16"
+main = "src/index.tsx"
+upload_source_maps = true
+# Set this to today's date
+compatibility_date = "2026-10-17"
 
 [assets]
 directory = "./dist"
+binding = "ASSETS"
 not_found_handling = "single-page-application"
