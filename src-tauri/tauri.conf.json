@@ -1,0 +1,83 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Quran Video Studio",
+  "version": "1.0.1",
+  "identifier": "com.csofts.quranvideostudio",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devUrl": "http://localhost:3000",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "title": "Quran Video Studio",
+        "width": 1200,
+        "height": 910,
+        "minWidth": 1000,
+        "minHeight": 800,
+        "center": true,
+        "decorations": false,
+        "transparent": true,
+        "maximizable": false,
+        "visible": false,
+        "fullscreen": false,
+        "resizable": true
+      }
+    ],
+    "security": {
+      "csp": null,
+      "assetProtocol": {
+        "enable": true,
+        "scope": [
+          "**"
+        ]
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "createUpdaterArtifacts": true,
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "publisher": "cSofts",
+    "category": "Video",
+    "shortDescription": "Batch video logo overlay",
+    "longDescription": "Jadoo overlays your logo onto an entire folder of videos in one batch run \u2014 pick a layout profile (position, size, transparency) per video size/aspect-ratio, and export at your chosen quality.",
+    "copyright": "Copyright \u00a9 2026 cSofts.com. All rights reserved.",
+    "externalBin": [
+      "binaries/ffmpeg",
+      "binaries/ffprobe"
+    ],
+    "resources": [
+      "sample-videos.json"
+    ],
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "installerIcon": "icons/icon.ico",
+        "uninstallerIcon": "icons/icon.ico"
+      }
+    },
+    "macOS": {
+      "minimumSystemVersion": "11.0"
+    }
+  },
+  "plugins": {
+    "updater": {
+      "active": true,
+      "endpoints": [
+        "https://github.com/dashingmza/quran-studio/releases/latest/download/latest.json"
+      ],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDg0RDNERDI2NzIzNjdBOEIKUldTTGVqWnlKdDNUaEt1cElTaXZqYjFzN1QwYXBabVBPVGE3WVY3S3FvSEh1TFVDeXNLOG5YK2EK"
+    }
+  }
+}

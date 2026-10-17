@@ -1,0 +1,21 @@
+[package]
+name = "quran-video-studio"
+version = "1.0.1"
+description = "Quran Studio is a modern web application that empowers users to create beautiful, shareable Quranic videos optimized for YouTube, Instagram Reels, and more."
+authors = ["Muhammad Zaheer Ahmad"]
+homepage = "https://github.com/DashingMZA/quran-studio"
+edition = "2024"
+rust-version = "1.95"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-fs = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-shell = "2"
+tauri-plugin-log = "2"
+tauri-plugin-updater = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

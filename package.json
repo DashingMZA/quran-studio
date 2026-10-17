@@ -1,0 +1,75 @@
+{
+  "name": "quran-video-studio",
+  "private": true,
+  "version": "1.0.1",
+  "description": "Quran Studio is a modern web application that empowers users to create beautiful, shareable Quranic videos optimized for YouTube, Instagram Reels, and more.",
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DashingMZA/quran-studio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DashingMZA/quran-studio/issues"
+  },
+  "homepage": "https://github.com/DashingMZA/quran-studio#readme",
+  "keywords": [
+    "Quran video maker",
+    "Islamic video editor",
+    "Quran video studio",
+    "Quran videos",
+    "Quran video creator"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "test": "vitest run --config vitest.config.ts",
+    "test:watch": "vitest --config vitest.config.ts",
+    "preview": "vite preview",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "fetch:ffmpeg": "node scripts/fetch-ffmpeg.mjs",
+    "prepare:ffmpeg": "node scripts/fetch-ffmpeg.mjs && node scripts/prepare-ffmpeg.mjs",
+    "app:icon": "tauri icon",
+    "app:dev": "npm run prepare:ffmpeg && tauri dev",
+    "app:build": "npm run prepare:ffmpeg && tauri build"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.12.3",
+    "@tauri-apps/plugin-dialog": "^2.7.0",
+    "@tauri-apps/plugin-fs": "^2.7.0",
+    "@tauri-apps/plugin-shell": "^2.5.0",
+    "@tauri-apps/plugin-updater": "^2.13.3",
+    "jszip": "^3.10.2",
+    "lucide-react": "^1.58.0",
+    "mediabunny": "^1.61.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-modern-audio-player": "^2.4.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@tauri-apps/cli": "^2.12.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.71.2",
+    "@typescript-eslint/parser": "^8.71.2",
+    "@vitejs/plugin-react": "^6.1.2",
+    "dotenv-cli": "^11.0.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5",
+    "jsdom": "^26.1.0",
+    "postcss": "^8.5.30",
+    "autoprefixer": "^10.4.21"
+  },
+  "type": "module"
+}
