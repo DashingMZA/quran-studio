@@ -1,4 +1,4 @@
-# 🎬 Quran Video Studio
+# 🎬 Quran Studio
 
 > Quran Studio is a web and desktop-ready editor for creating Quran recitation videos. It combines Quran text, translations, timed recitation audio, typography controls, and visual backgrounds into an exportable MP4 canvas workflow.
 
@@ -6,11 +6,17 @@ Created with thanks for this work: https://github.com/quran8vs/Quran-Video-Studi
 
 The app is built with React, Vite, TypeScript, Tailwind CSS, pnpm, and Tauri.
 
-[![License](https://img.shields.io/badge/license-Open%20Source-brightgreen)](LICENSE)
-[![Built with React](https://img.shields.io/badge/built%20with-React-61DAFB?logo=react)](https://react.dev)
+[![License](https://img.shields.io/badge/license-GPLv3-brightgreen)](LICENSE)
+[![React](https://img.shields.io/badge/built%20with-React-61DAFB?logo=react)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![pnpm](https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=white)](https://pnpm.io)
+[![Tauri](https://img.shields.io/badge/Tauri-24C8DB?logo=tauri&logoColor=white)](https://tauri.app)
 
-[![Github](https://img.shields.io/badge/Dev_by-Zaheer_Ahmad-blue?style=for-the-badge)](https://github.com/DashingMZA/)
+[![Zaheer on Github](https://img.shields.io/badge/Dev_by-Zaheer_Ahmad-blue?style=for-the-badge)](https://github.com/DashingMZA/)
+
+[![Quran Studio](https://img.shields.io/github/v/release/DashingMZA/quran-studio?style=for-the-badge)](https://github.com/DashingMZA/quran-studio/releases)
 
 <p>
   <sub>Built with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a> • <a href="https://ko-fi.com/dashingmza">Support on Ko-fi ☕</a> • <a href="https://buymeacoffee.com/dashingmza">Support on BuyMeACoffee ☕</a> • <a href="https://dashingmza.gumroad.com/coffee">Support on Gumroad ☕</a></sub>
@@ -31,7 +37,7 @@ The app is built with React, Vite, TypeScript, Tailwind CSS, pnpm, and Tauri.
 - [📜 Scripts](#-scripts)
 - [⚠️ Troubleshooting](#️-troubleshooting)
 - [📁 Project Structure](#-project-structure)
-- [🖥️ Desktop App (Tauri)](#️-desktop-app-tauri)
+- [🖥️ Desktop App](#️-desktop-app-tauri)
 - [🚢 Release Process](#-release-process)
 - [☁️ Web Deployment](#️-web-deployment)
 - [📝 License](#-license)
@@ -234,14 +240,14 @@ time. Set it in your `.env` (local/CLI deploys) or in the hosting
 dashboard's build environment (git-connected deploys) _before_ building,
 otherwise the Image/Video background tabs will be empty.
 
-### Vercel
+### Vercel [![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
 
 1. Import the repository in Vercel — the framework is auto-detected as **Vite**.
 2. Build command `pnpm build`, output directory `dist` (already set in `vercel.json`).
 3. Add the environment variable `VITE_PIXABAY_API_KEY` in the Vercel dashboard
    (Project Settings → Environment Variables).
 
-### Cloudflare Workers
+### Cloudflare Workers [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://workers.cloudflare.com)
 
 The app is a pure client-side SPA (no server code, no database), so it
 deploys to Workers as **static assets** — see `wrangler.toml`. No Worker
