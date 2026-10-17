@@ -1,7 +1,7 @@
 {
   "name": "quran-video-studio",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Quran Studio is a modern web application that empowers users to create beautiful, shareable Quranic videos optimized for YouTube, Instagram Reels, and more.",
   "license": "GPL-3.0-only",
   "repository": {

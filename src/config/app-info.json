@@ -1,12 +1,12 @@
 {
   "appName": "Quran Video Studio",
-  "version": "v1.0.0",
+  "version": "v1.0.1",
   "author": "Muhammad Zaheer Ahmad",
   "description": "Create Quran recitation videos with timed text, translations, rich backgrounds, and fast MP4 export.",
   "socialLinks": [
     {
       "platform": "github",
-      "url": "https://github.com/DashingMZA",
+      "url": "https://github.com/DashingMZA/quran-studio",
       "label": "Muhammad Zaheer Ahmad"
     },
     {
