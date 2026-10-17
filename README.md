@@ -11,7 +11,7 @@ The app is built with React, Vite, TypeScript, Tailwind CSS, pnpm, and Tauri.
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 
 <p>
-  [![Zaheer on Github](https://img.shields.io/badge/Dev_by-Zaheer_Ahmad-blue?style=for-the-badge)](https://github.com/DashingMZA/)
+  [![Github](https://img.shields.io/badge/Dev_by-Zaheer_Ahmad-blue?style=for-the-badge)](https://github.com/DashingMZA/)
   <br>
   <sub>Built with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a> • <a href="https://ko-fi.com/dashingmza">Support on Ko-fi ☕</a> • <a href="https://buymeacoffee.com/dashingmza">Support on BuyMeACoffee ☕</a> • <a href="https://dashingmza.gumroad.com/coffee">Support on Gumroad ☕</a></sub>
 </p>
