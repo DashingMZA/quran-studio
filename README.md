@@ -21,10 +21,8 @@ The app is built with ⬇️
 [![Version](https://img.shields.io/github/v/release/DashingMZA/quran-studio?style=for-the-badge&label=)](https://github.com/DashingMZA/quran-studio/releases)
 
 <p>
-  <sub>Built with love in Pakistan with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a> • <a href="https://www.facebook.com/dashingmza">Contact via Facebook</a></sub>
+  <sub>Built with love ❤︎ in Pakistan 🇵🇰 U+1F1F5 U+1F1F0 with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a> • <a href="https://www.facebook.com/dashingmza">Contact via Facebook</a></sub>
 </p>
-
-If you find my open-source projects useful, consider supporting my work. Your contributions help me maintain existing projects and build new tools. ⬇️
 
 [![Support on BuyMeACoffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/dashingmza)
 [![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/dashingmza)
@@ -281,7 +279,9 @@ This project is open source under the **GNU General Public License v3.0**
 
 ## Support My Work
 
-[![Support on BuyMeACoffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black)](https://buymeacoffee
+If you find my open-source projects useful, consider supporting my work. Your contributions help me maintain existing projects and build new tools. ⬇️
+
+[![Support on BuyMeACoffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black)](https://buymeacoffee)
 [![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/dashingmza)              
 [![Support on Gumroad](https://img.shields.io/badge/Gumroad-FF90E8?style=for-the-badge&logo=gumroad&logoColor=white)](https://dashingmza.gumroad.com/coffee)
 
