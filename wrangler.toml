@@ -1,11 +1,6 @@
-"$schema" = "./node_modules/wrangler/config-schema.json"
 name = "quran-studio"
-main = "src/index.tsx"
-upload_source_maps = true
-# Set this to today's date
 compatibility_date = "2026-10-17"
 
 [assets]
 directory = "./dist"
-binding = "ASSETS"
 not_found_handling = "single-page-application"
