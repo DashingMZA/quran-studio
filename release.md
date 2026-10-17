@@ -51,12 +51,18 @@ This prints the **public key** — it must match the `pubkey` already stored
 in `src-tauri/tauri.conf.json` (`plugins.updater.pubkey`). If you generate
 a fresh keypair, update that field and commit it.
 
-For local signed builds, copy `.env.example` to `.env` and set:
+For local signed builds, export these as **real OS environment variables**
+in the shell that runs the build (the Tauri CLI does not read `.env`
+files). PowerShell example:
 
-```env
-TAURI_SIGNING_PRIVATE_KEY=/path/to/your/quran-studio.key
-TAURI_SIGNING_PRIVATE_KEY_PASSWORD=
+```powershell
+$env:TAURI_SIGNING_PRIVATE_KEY="C:/path/to/your/quran-studio.key"
+$env:TAURI_SIGNING_PRIVATE_KEY_PASSWORD=""  # only if you set one
+pnpm app:build
 ```
+
+(`TAURI_SIGNING_PRIVATE_KEY` accepts the key file path or the raw key
+content.)
 
 ### One-time setup: GitHub Secrets
 

@@ -507,3 +507,11 @@ install`; npm rewrote `package-lock.json` as a side effect (had to be
   does NOT read `.env` files — `TAURI_SIGNING_PRIVATE_KEY[_PASSWORD]`
   must be real OS env vars (owner hit "no private key" despite having
   the path in `.env.local`). Pushed as `0eed45a`.
+- **2026-10-16:** `release.md` local-signing section corrected: Tauri CLI
+  ignores `.env` — the signing vars must be real OS env vars (PowerShell
+  example added). Owner directive going forward: local env file is `.env`
+  (not `.env.local`); never create it via the GitHub web UI.
+- **2026-10-17:** Window `visible` set to `true` in `tauri.conf.json`
+  (was `false` + JS `show()` in index.tsx — too fragile; user still
+  reported no window). Belt and suspenders: JS `show()` kept (no-op if
+  already visible).
