@@ -16,7 +16,9 @@ The app is built with React, Vite, TypeScript, Tailwind CSS, pnpm, and Tauri.
 
 [![Zaheer on Github](https://img.shields.io/badge/Dev_by-Zaheer_Ahmad-blue?style=for-the-badge)](https://github.com/DashingMZA/)
 
-[![Quran Studio](https://img.shields.io/github/v/release/DashingMZA/quran-studio?style=for-the-badge)](https://github.com/DashingMZA/quran-studio/releases)
+[![Download](https://img.shields.io/badge/Download-000000?style=for-the-badge)](https://github.com/DashingMZA/quran-studio/releases)
+[![Quran Studio](https://img.shields.io/badge/Quran-Studio-111111?style=for-the-badge&labelColor=22C55E)](https://github.com/DashingMZA/quran-studio)
+[![Quran Studio Release](https://img.shields.io/github/v/release/DashingMZA/quran-studio?style=for-the-badge&utm_source=github.com)](https://github.com/DashingMZA/quran-studio/releases)
 
 <p>
   <sub>Built with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a> • <a href="https://ko-fi.com/dashingmza">Support on Ko-fi ☕</a> • <a href="https://buymeacoffee.com/dashingmza">Support on BuyMeACoffee ☕</a> • <a href="https://dashingmza.gumroad.com/coffee">Support on Gumroad ☕</a></sub>
@@ -240,14 +242,14 @@ time. Set it in your `.env` (local/CLI deploys) or in the hosting
 dashboard's build environment (git-connected deploys) _before_ building,
 otherwise the Image/Video background tabs will be empty.
 
-### Vercel [![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
+### ▲ Vercel 
 
 1. Import the repository in Vercel — the framework is auto-detected as **Vite**.
 2. Build command `pnpm build`, output directory `dist` (already set in `vercel.json`).
 3. Add the environment variable `VITE_PIXABAY_API_KEY` in the Vercel dashboard
    (Project Settings → Environment Variables).
 
-### Cloudflare Workers [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://workers.cloudflare.com)
+### 🟠 Cloudflare Workers
 
 The app is a pure client-side SPA (no server code, no database), so it
 deploys to Workers as **static assets** — see `wrangler.toml`. No Worker
@@ -263,6 +265,8 @@ Connect to Git → select `DashingMZA/quran-studio`. Production branch =
 **CLI:** `pnpm exec wrangler login` (one-time), then `pnpm deploy:cf`.
 
 Full step-by-step: [release.md](./release.md#4-web-deploy--cloudflare-workers-alternative-to-vercel).
+
+[![Deploy to Cloudflare](https://img.shields.io/badge/Deploy_to_Cloudflare-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://deploy.workers.cloudflare.com/?url=https://github.com/DashingMZA/quran-studio)
 
 ---
 
