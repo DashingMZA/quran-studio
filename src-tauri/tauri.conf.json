@@ -57,9 +57,6 @@
       "binaries/ffmpeg",
       "binaries/ffprobe"
     ],
-    "resources": [
-      "sample-videos.json"
-    ],
     "windows": {
       "nsis": {
         "installMode": "currentUser",
