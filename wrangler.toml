@@ -4,7 +4,7 @@
 # (VITE_* env vars are baked in at build time — set them before building.)
 
 name = "quran-studio"
-compatibility_date = "2026-10-16"
+compatibility_date = "2026-10-17"
 
 [assets]
 directory = "./dist"
