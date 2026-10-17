@@ -31,7 +31,7 @@ The app is built with React, Vite, TypeScript, Tailwind CSS, pnpm, and Tauri.
 - [📁 Project Structure](#-project-structure)
 - [🖥️ Desktop App (Tauri)](#️-desktop-app-tauri)
 - [🚢 Release Process](#-release-process)
-- [☁️ Web Deployment (Vercel)](#️-web-deployment-vercel)
+- [☁️ Web Deployment](#️-web-deployment)
 - [📝 License](#-license)
 
 ---
