@@ -518,3 +518,7 @@ install`; npm rewrote `package-lock.json` as a side effect (had to be
 - **2026-10-17:** `DesktopAboutOverlay` Information tab now shows the real
   app icon (`/icon/web-app-manifest-512x512.png`) instead of the generic
   lucide `Info` glyph (owner request).
+- **2026-10-17:** `DesktopControls` (minimize/maximize/close) moved from
+  `fixed` top-right of the window into the middle player column
+  (`absolute` inside the preview area) — owner: it was overlapping the
+  right sidebar's "Styling" header.

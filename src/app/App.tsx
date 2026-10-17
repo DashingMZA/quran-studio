@@ -178,8 +178,6 @@ export default function App() {
   return (
     <ErrorBoundary>
       <div className="flex flex-col md:flex-row h-screen bg-studio-bg text-studio-text overflow-hidden font-sans">
-        <DesktopControls />
-
         {/* Hidden Font Preloader hack */}
         <div
           style={{
@@ -210,6 +208,9 @@ export default function App() {
 
         {/* PREVIEW AREA */}
         <div className="flex-1 flex flex-col items-center justify-center bg-[#050505] relative p-8">
+          {/* Window controls (desktop only) — top-right of the player column */}
+          <DesktopControls />
+
           <VideoCanvas
             canvasRef={canvasRef}
             config={config}
