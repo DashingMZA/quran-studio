@@ -515,3 +515,6 @@ install`; npm rewrote `package-lock.json` as a side effect (had to be
   (was `false` + JS `show()` in index.tsx — too fragile; user still
   reported no window). Belt and suspenders: JS `show()` kept (no-op if
   already visible).
+- **2026-10-17:** `DesktopAboutOverlay` Information tab now shows the real
+  app icon (`/icon/web-app-manifest-512x512.png`) instead of the generic
+  lucide `Info` glyph (owner request).

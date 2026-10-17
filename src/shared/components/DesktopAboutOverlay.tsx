@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
   X,
-  Info,
   RefreshCw,
   Download,
   Loader2,
@@ -153,9 +152,11 @@ export default function DesktopAboutOverlay({
   const renderInfoTab = () => (
     <div className="space-y-4">
       <div className="flex items-center gap-4">
-        <div className="w-16 h-16 rounded-2xl bg-studio-accent/15 border border-studio-accent/30 flex items-center justify-center">
-          <Info className="w-8 h-8 text-studio-accent" />
-        </div>
+        <img
+          src="/icon/web-app-manifest-512x512.png"
+          alt="Quran Video Studio icon"
+          className="w-16 h-16 rounded-2xl shadow-lg"
+        />
         <div>
           <h3 className="text-xl font-bold text-studio-text">{appName}</h3>
           <p className="text-sm text-studio-textMuted tabular-nums">
