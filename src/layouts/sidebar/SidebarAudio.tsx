@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { FileAudio, Mic, Mic2, SlidersHorizontal } from "lucide-react";
 import { VideoConfig } from "../../features/video-editor/types";
 import { VerseData } from "../../features/quran/types";
 import { RECITERS } from "../../shared/constants";
-import CustomAudioStudio from "../../features/audio/components/CustomAudioStudio";
+
+const CustomAudioStudio = lazy(
+  () => import("../../features/audio/components/CustomAudioStudio"),
+);
 
 interface SidebarAudioProps {
   config: VideoConfig;
@@ -121,6 +124,7 @@ export default function SidebarAudio({
         </div>
       </div>
 
+      <Suspense fallback={null}>
       <CustomAudioStudio
         isOpen={isStudioOpen}
         onClose={() => setIsStudioOpen(false)}
@@ -128,6 +132,7 @@ export default function SidebarAudio({
         setConfig={setConfig}
         verses={verses}
       />
+      </Suspense>
     </div>
   );
 }

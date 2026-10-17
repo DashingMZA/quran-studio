@@ -7,9 +7,6 @@ coverage/
 *.tsbuildinfo
 *.log
 
-quran-studio-fixed.zip
-
-
 # Rust / Tauri
 src-tauri/target/
 src-tauri/binaries/ffmpeg*

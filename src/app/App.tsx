@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { Play, Pause, Loader2, Film, Settings } from "lucide-react";
 import { VideoConfig } from "../features/video-editor/types";
 import { SURAHS } from "../features/quran/data/surahs";
@@ -10,6 +10,32 @@ import { useVideoExporter } from "../features/video-editor/hooks/useVideoExporte
 import VideoCanvas from "../features/video-editor/components/VideoCanvas";
 import DesktopControls from "../shared/components/DesktopControls";
 import AboutOverlay from "../shared/components/AboutOverlay";
+
+
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { error: Error | null }
+> {
+  state = { error: null as Error | null };
+  static getDerivedStateFromError(error: Error) {
+    return { error };
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <div style={{ padding: 24, background: "#09090b", color: "#f4f4f5", minHeight: "100vh" }}>
+          <h1 style={{ color: "#f87171" }}>UI Error</h1>
+          <pre style={{ whiteSpace: "pre-wrap" }}>
+            {this.state.error.message}
+            {"\n"}
+            {this.state.error.stack}
+          </pre>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 export default function App() {
   // --- STATE ---
@@ -126,6 +152,8 @@ export default function App() {
   const isAnyExporting = isVideoExporting;
 
   return (
+    <ErrorBoundary>
+
     <div className="flex flex-col md:flex-row h-screen bg-studio-bg text-studio-text overflow-hidden font-sans">
       <DesktopControls />
 
@@ -263,5 +291,6 @@ export default function App() {
         onClose={() => setIsSettingsOpen(false)}
       />
     </div>
+    </ErrorBoundary>
   );
 }
