@@ -3,7 +3,7 @@
 # Build first (`pnpm build`), then `pnpm deploy:cf`.
 # (VITE_* env vars are baked in at build time — set them before building.)
 
-name = "quran-studio"
+name = "quran-studios"
 compatibility_date = "2026-10-16"
 
 [assets]
