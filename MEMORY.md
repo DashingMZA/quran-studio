@@ -154,6 +154,11 @@ pnpm deploy:cf          # pnpm build && wrangler deploy → Cloudflare Workers (
 Web targets: `vercel.json` (Vercel, Vite preset) and `wrangler.toml`
 (Cloudflare Workers static assets, SPA fallback). `VITE_PIXABAY_API_KEY`
 is baked in at build time — set before building/deploying.
+Dashboard git-deploys: Workers & Pages → Connect to Git, production
+branch `master`, build `pnpm build`, deploy `npx wrangler deploy`,
+build vars `NODE_VERSION=24`, `PNPM_VERSION=12.9.1`
+(`.node-version` = `24` committed as fallback). Full steps in
+`release.md` §4.
 
 Environment: copy `.env.example` → `.env`. Only `VITE_PIXABAY_API_KEY`
 matters for web. Tauri signing vars (`TAURI_SIGNING_PRIVATE_KEY[...]`)
