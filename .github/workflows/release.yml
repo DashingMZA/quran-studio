@@ -1,13 +1,13 @@
 name: Release
 
-# Ek git tag jo "v" se shuru ho (jaise v1.0.1) push karne pe ye workflow
+# Ek git tag jo "v" se shuru ho (jaise v1.0.0) push karne pe ye workflow
 # chalta hai — Windows/macOS/Linux build karta hai aur ek GitHub Release
 # (draft) bana kar sab installers + updater artifacts (latest.json) attach
 # kar deta hai.
 #
 # Trigger karne ka tareeka:
-#   git tag v1.0.1
-#   git push origin v1.0.1
+#   git tag v1.0.0
+#   git push origin v1.0.0
 
 on:
   push:
@@ -49,7 +49,7 @@ jobs:
       # hai.
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        # Version yahan nahi deni — package.json ka "packageManager": "pnpm@12.4.2"
+        # Version yahan nahi deni — package.json ka use hoga"
         # field khud version pin karta hai; dono jagah dena conflict error deta hai
         # ("Multiple versions of pnpm specified").
 

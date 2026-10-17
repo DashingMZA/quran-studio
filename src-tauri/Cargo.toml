@@ -1,6 +1,6 @@
 [package]
 name = "quran-video-studio"
-version = "1.0.1"
+version = "1.0.0"
 description = "Quran Studio is a modern web application that empowers users to create beautiful, shareable Quranic videos optimized for YouTube, Instagram Reels, and more."
 authors = ["Muhammad Zaheer Ahmad"]
 homepage = "https://github.com/DashingMZA/quran-studio"
