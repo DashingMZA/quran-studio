@@ -522,3 +522,7 @@ install`; npm rewrote `package-lock.json` as a side effect (had to be
   `fixed` top-right of the window into the middle player column
   (`absolute` inside the preview area) — owner: it was overlapping the
   right sidebar's "Styling" header.
+- **2026-10-17:** Added `SECURITY.md` (owner request): vulnerability
+  reporting, supported versions, client-side security model, Pixabay key
+  handling (client-visible by design), Tauri signing-key rules, updater
+  signature verification, capability least-privilege, supply-chain notes.

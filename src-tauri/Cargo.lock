@@ -2091,9 +2091,9 @@ dependencies = [
 
 [[package]]
 name = "num_threads"
-version = "0.1.8"
+version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cabcc654086861f9e1bc5115258de62ef92c79b20f4615a1b0cc57c4e82027d4"
+checksum = "5c7398b9c8b70908f6371f47ed36737907c87c52af34c268fed0bf0ceb92ead9"
 dependencies = [
  "libc",
 ]
@@ -2636,7 +2636,7 @@ dependencies = [
 
 [[package]]
 name = "quran-video-studio"
-version = "1.0.1"
+version = "1.0.0"
 dependencies = [
  "serde",
  "serde_json",
@@ -2645,7 +2645,6 @@ dependencies = [
  "tauri-plugin-dialog",
  "tauri-plugin-fs",
  "tauri-plugin-log",
- "tauri-plugin-process",
  "tauri-plugin-shell",
  "tauri-plugin-updater",
 ]
@@ -3737,16 +3736,6 @@ dependencies = [
  "tauri-plugin",
  "thiserror 2.0.21",
  "time",
-]
-
-[[package]]
-name = "tauri-plugin-process"
-version = "2.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "74ae3d8549ae564c0397377373e262f340908eb23a5b9fbe03f2a00007dc0038"
-dependencies = [
- "tauri",
- "tauri-plugin",
 ]
 
 [[package]]

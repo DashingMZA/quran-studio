@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Quran Video Studio",
-  "version": "1.0.1",
-  "identifier": "com.csofts.quranstudio",
+  "version": "1.0.0",
+  "identifier": "com.dashingmza.quranstudio",
   "build": {
     "beforeDevCommand": "pnpm dev",
     "beforeBuildCommand": "pnpm build",
@@ -46,11 +46,11 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
-    "publisher": "cSofts",
+    "publisher": "DashingMZA",
     "category": "Video",
     "shortDescription": "Quran Video Studio",
     "longDescription": "Quran Studio is a modern web application that empowers users to create beautiful, shareable Quranic videos optimized for YouTube, Instagram Reels, and more.",
-    "copyright": "Copyright \u00a9 2026 cSofts.com. Licensed under the GNU General Public License v3.0.",
+    "copyright": "Copyright \u00a9 2026 Muhammad Zaheer Ahmad. Licensed under the GNU General Public License v3.0.",
     "externalBin": ["binaries/ffmpeg", "binaries/ffprobe"],
     "windows": {
       "nsis": {
