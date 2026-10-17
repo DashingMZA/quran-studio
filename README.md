@@ -11,13 +11,14 @@ The app is built with React, Vite, TypeScript, Tailwind CSS, pnpm, and Tauri.
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 
 <p>
-  <img src="https://img.shields.io/badge/Dev_by-Zaheer_Ahmad-blue?style=for-the-badge">
+  [![Zaheer on Github](https://img.shields.io/badge/Dev_by-Zaheer_Ahmad-blue?style=for-the-badge)](https://github.com/DashingMZA/)
   <br>
   <sub>Built with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a> • <a href="https://ko-fi.com/dashingmza">Support on Ko-fi ☕</a> • <a href="https://buymeacoffee.com/dashingmza">Support on BuyMeACoffee ☕</a> • <a href="https://dashingmza.gumroad.com/coffee">Support on Gumroad ☕</a></sub>
 </p>
 
-[![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com)
-
+[![Support on BuyMeACoffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/dashingmza)
+[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/dashingmza)
+[![Support on Gumroad](https://img.shields.io/badge/Gumroad-FF90E8?style=for-the-badge&logo=gumroad&logoColor=white)](https://dashingmza.gumroad.com/coffee)
 ---
 
 ![Alt text](public/quran-studio.png)
