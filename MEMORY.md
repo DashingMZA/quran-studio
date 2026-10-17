@@ -33,30 +33,36 @@ on canvas, and export MP4 (16:9 YouTube, 1:1 Instagram, 9:16 TikTok/Reels)
 
 ## 2. Current Project State
 
-- **Branch:** `master`, remote at `69a81ab` ("1.0.0", 2026-10-16).
-- **Working tree: DIRTY — uncommitted pnpm migration + TS fixes are in
-  progress** (see §8). Do not assume a clean tree.
+- **Branch:** `master`, remote at `f5a019e` (2026-10-16, "feat(desktop):
+  fix blank window, wire updater, add desktop About page"). Working tree
+  CLEAN and content-identical to remote (verified by tree SHA).
+- **Remote history since `69a81ab` ("1.0.0"):** `97b797d` (pnpm migration
+  + full fix batch) → `69134a2` (user, web UI: "Create .env.local" —
+  contained the REAL Pixabay API key; SECURITY INCIDENT, see §12) →
+  `da19a5c` (Cloudflare dashboard git-deploy docs) → `da6842c` (user, web
+  UI: "Delete .env.local") → `68acc50` (wrangler.toml name →
+  `quran-studios`) → `0b6a0c0` (user merge of their local `74784f9`
+  "1.0.0" + `2278ce6` "Update wrangler.toml", which reverted the worker
+  name to `quran-studio` and set the user's OWN Tauri updater pubkey +
+  Cargo changes) → `4af67d2` (prettier format, 15 files) → `776189b`
+  (vitest `__dirname` → `import.meta.dirname`) → `b15e1eb` (scripts
+  simplified) → `f5a019e` (desktop updater + About page).
 - **Last verified checks (2026-10-16, sandbox) — ALL GREEN:**
-  - `pnpm install` — PASS (generated `pnpm-lock.yaml`, 458 entries).
-  - `pnpm typecheck` — PASS (fixed: 10 React 19/lucide errors +
-    `dom-webcodecs` via `@types/dom-webcodecs@0.1.13` devDependency).
-  - `pnpm build` — PASS (`tsc --noEmit` + `vite build`, dist/ emitted).
-  - `pnpm lint` — PASS (fixed 2 `react-hooks/set-state-in-effect` errors:
-    ColorPicker → adjust-during-render; useQuranData error branch →
-    targeted disable with reason).
-  - `pnpm test` — PASS (4/4; new `src/shared/constants/constants.test.ts`).
-  - `pnpm dev` / `pnpm preview` smoke — PASS (HTTP 200, correct title).
-  - `pnpm exec tauri info` — PASS (config parses; CLI 2.12.3).
-  - `scripts/fetch-ffmpeg.mjs` — PASS (downloaded linux-x64 binaries).
-  - `pnpm app:dev` / `pnpm app:build` native compile — BLOCKED: no Rust
-    toolchain / webview deps in this sandbox (1 GB free RAM, 2 cores —
-    a Tauri release compile would OOM); desktop builds are covered by
-    the release workflow (also unverified end-to-end).
-  - release.yml — YAML valid, logic reviewed (was broken before the
-    pnpm migration: `pnpm/action-setup` needs the `packageManager`
-    field, now present).
-- Nothing in the working tree has been deployed. No GitHub release exists
-  yet (UNVERIFIED — releases page not checked).
+  `pnpm typecheck`, `pnpm lint`, `pnpm test` (4/4), `pnpm build`
+  (tsc + vite, dist/ emitted). Desktop native compile still BLOCKED in
+  sandbox (no Rust toolchain); covered by release.yml CI.
+- **Desktop status (user-reported):** user built the .exe locally,
+  installed and opened it. Two issues found and fixed in `f5a019e`:
+  (1) window opened invisible (`visible: false` with no `show()` call);
+  (2) updater plugin never registered in `main.rs`. User has generated
+  their own Tauri signing keypair (pubkey in `tauri.conf.json`) and is
+  preparing the first desktop release (`v1.0.0` tag → release.yml).
+- **Cloudflare status:** user is doing dashboard Connect-to-Git setup
+  themselves (worker `quran-studio`). Build vars: `NODE_VERSION=24`,
+  `PNPM_VERSION=12.9.1`; `VITE_PIXABAY_API_KEY` intentionally left blank
+  for now (app builds/runs without it); no database needed (pure static
+  SPA — unlike repos with D1/R2 bindings, the dashboard DB prompt can be
+  skipped).
 
 ## 3. Architecture and Directory Map
 
@@ -78,9 +84,12 @@ src/
                               sidebar/{SidebarAudio,SidebarFormat,SidebarLayout,
                               SidebarSelection,SidebarStyle,SidebarTypography}.tsx
   shared/                     components/{AboutOverlay,ColorPicker,
-                              DesktopControls,ToggleSwitch,Tooltip}.tsx,
+                              DesktopAboutOverlay (desktop-only About page),
+                              DesktopControls,ToggleSwitch,Tooltip,
+                              UpdateBanner (desktop update notification)}.tsx,
                               constants/index.ts (RECITERS, FONTS,
                               FONT_BASE_URLS, CANVAS_SIZES),
+                              hooks/useAppUpdater.ts (desktop updater logic),
                               utils/{platform.ts (isTauri/isWeb),
                               tauri-fs.ts, ffmpeg.ts}, types/index.ts
   index.css                   Tailwind + custom styles
@@ -120,7 +129,9 @@ Verified from `package.json` / lockfile / configs (2026-10-16):
 | vite                 | 8.3.4                                | dev port 3000                                          |
 | typescript           | 6.0.3                                | `strict`, `noUnusedLocals/Parameters`                  |
 | tailwindcss          | 3.4.x                                | v3 config style; v4 upgrade is breaking (open PR)      |
-| @tauri-apps/api etc. | 2.12.x / 2.7.x                       | Tauri 2                                                |
+| @tauri-apps/api etc. | 2.12.x / 2.7.x                       | Tauri 2; NOTE: `@tauri-apps/api` has NO `process` module —      |
+|                      |                                        | `relaunch`/`exit` live in `@tauri-apps/plugin-process` (^2.4.0) |
+|                      |                                        | + `tauri-plugin-process = "2"` (Cargo)                         |
 | mediabunny           | 1.61.6                               | MP4 muxing (successor of mp4-muxer)                    |
 | lucide-react         | 1.58.0                               | **No brand icons** — use `public/social_media/*.svg`   |
 | vitest               | 5.0.5 + jsdom                        | Configured; zero test files                            |
@@ -141,9 +152,10 @@ pnpm dev                # vite dev server → http://localhost:3000
 pnpm build              # tsc --noEmit && vite build → dist/
 pnpm preview            # serve the production build locally
 pnpm typecheck           # tsc --noEmit
-pnpm lint               # eslint . --report-unused-disable-directives --max-warnings 0
-pnpm format             # prettier --write .
-pnpm test               # vitest run (no test files exist yet)
+pnpm lint               # eslint .  (simplified 2026-10-16; was --report-unused-disable-directives --max-warnings 0)
+pnpm format             # prettier --write "src/**/*.{ts,tsx,css}"  (scoped to src 2026-10-16; was --write .)
+pnpm test               # vitest run
+pnpm tauri              # tauri CLI passthrough (added 2026-10-16; binary from @tauri-apps/cli)
 pnpm fetch:ffmpeg       # download platform ffmpeg/ffprobe → src-tauri/binaries/
 pnpm prepare:ffmpeg     # fetch + rename to Tauri sidecar names
 pnpm app:dev            # prepare:ffmpeg && tauri dev   (needs Rust + webview deps)
@@ -257,18 +269,69 @@ Twitter/Instagram` imports in `shared/components/AboutOverlay.tsx`
   `sample-videos.json` resource; bumped versions to 1.0.0
   (`package.json`, `src-tauri/Cargo.toml`, `tauri.conf.json`).
 
+### 2026-10-16 — pnpm migration + fix batch pushed (`97b797d`)
+
+- Single commit to `master` via Git Data API (git-https with PAT fails in
+  this sandbox; PAT is api.github.com-only). Tree SHA verified
+  byte-identical to local before the ref update.
+
+### 2026-10-16 — Cloudflare Workers hosting (`a6978f1`, `da19a5c`)
+
+- Pure static SPA → Workers Static Assets, no Worker code. Added
+  `wrangler.toml` (`[assets]` → `./dist`, SPA fallback), `wrangler@4`
+  devDep, `predeploy:cf`/`deploy:cf` scripts, `.node-version` (`24`).
+  `release.md` §4 documents the dashboard Connect-to-Git flow (production
+  branch `master`, build `pnpm build`, deploy `npx wrangler deploy`,
+  build vars `NODE_VERSION=24`, `PNPM_VERSION=12.9.1`,
+  `VITE_PIXABAY_API_KEY`). User is doing the dashboard setup themselves;
+  key left blank for now, no database needed (no bindings).
+
+### 2026-10-16 — Scripts verified + prettier format (`4af67d2`)
+
+- All 6 scripts verified working (`typecheck`/`lint`/`test`/`preview`
+  pass). `pnpm format` found style drift in 15 files; fixed and pushed
+  on top of the user's merge (`0b6a0c0`) — only the 15 files changed,
+  user's `tauri.conf.json` pubkey + Cargo changes preserved.
+
+### 2026-10-16 — vitest config warning fix (`776189b`)
+
+- `vitest.config.ts`: `__dirname` → `import.meta.dirname` (silences the
+  Vite native `configLoader` warning; Node ≥ 20.11, repo requires 24).
+
+### 2026-10-16 — Scripts simplified (`b15e1eb`, owner-directed)
+
+- `lint` → `eslint .`, `format` → scoped to `src/**/*.{ts,tsx,css}`,
+  added `"tauri": "tauri"` script (binary already provided by
+  `@tauri-apps/cli` devDep).
+
+### 2026-10-16 — Desktop updater + About page (`f5a019e`)
+
+- **Root cause 1 (blank window):** `tauri.conf.json` sets the main window
+  `visible: false`, but no code ever called `show()` — the installed .exe
+  opened invisible. Fixed: `src/index.tsx` calls
+  `getCurrentWindow().show()` at bundle load (desktop only).
+- **Root cause 2 (updater dead):** `tauri-plugin-updater` was in
+  `Cargo.toml` and `plugins.updater` in `tauri.conf.json`, but the plugin
+  was never registered in `main.rs` and the `updater:default` capability
+  was missing. Added both, plus `tauri-plugin-process` /
+  `@tauri-apps/plugin-process` (`^2.4.0`) for `relaunch` (Tauri v2 moved
+  it out of `@tauri-apps/api`; no `process` module exists there) with
+  `process:default` capability.
+- **New:** `src/shared/hooks/useAppUpdater.ts` (desktop-gated
+  check/download/install with progress); `UpdateBanner.tsx` (startup
+  update notification ~4s after launch, one-click install + relaunch);
+  `DesktopAboutOverlay.tsx` (desktop-only About page: Information tab
+  with name/version/author/license, Updates tab with version,
+  check-for-updates, release notes, progress); About `Info` button in
+  `App.tsx` controls (desktop only). Web build unaffected.
+- **Verification:** typecheck/lint/test/build all green.
+
 ## 8. In-Progress Work
 
-**pnpm migration + full fix batch — uncommitted on `master`, on top of
-`69a81ab`.** Everything is done and verified green (see §2): dep
-install, 10 TS fixes, `@types/dom-webcodecs`, 2 lint fixes,
-`tauri.conf.json` metadata (identifier `com.dashingmza.quranstudio`,
-publisher `DashingMZA`, GPL copyright), `release.yml` "Jadoo" →
-"Quran Studio", README rewrite (conflicts removed, React 19/pnpm/
-mediabunny, Vercel section), `.env.example` placeholder, new
-`vercel.json`, `release.md`, smoke test file. Remaining: single commit
-
-- push (owner's standing directive: push-after-verified in one commit).
+Nothing in progress. All batches pushed; tree clean and in sync with
+remote `f5a019e`. (Historical note: this section previously tracked the
+uncommitted pnpm migration — completed and pushed as `97b797d` on
+2026-10-16.)
 
 ## 9. Bugs and Troubleshooting
 
@@ -296,6 +359,17 @@ mediabunny, Vercel section), `.env.example` placeholder, new
 - **`.env.example` contained a real local path (FIXED, 2026-10-16).**
   Now `/path/to/your/quran-studio.key` placeholder. (Path only, no key
   material was ever exposed.)
+- **Desktop window opened invisible (FIXED, 2026-10-16).** `tauri.conf.json`
+  sets `visible: false` but no code called `show()`. Fixed in
+  `src/index.tsx` (show at bundle load, desktop only).
+- **Updater plugin never registered (FIXED, 2026-10-16).** Config
+  (`plugins.updater`) and Cargo dep existed, but `main.rs` lacked
+  `.plugin(tauri_plugin_updater::Builder::new().build())` and the
+  `updater:default` capability was missing. Both added; also added
+  `tauri-plugin-process` for `relaunch`.
+- **`@tauri-apps/api/process` does not exist (FIXED, 2026-10-16).**
+  `relaunch`/`exit` moved to `@tauri-apps/plugin-process` in Tauri v2
+  (verified against `@tauri-apps/api@2.12.4`). See AGENTS.md lessons.
 
 ## 10. Failed Attempts and Lessons Learned
 
@@ -313,22 +387,33 @@ install`; npm rewrote `package-lock.json` as a side effect (had to be
 
 | Check                                       | Status (2026-10-16) | Notes                                       |
 | ------------------------------------------- | ------------------- | ------------------------------------------- |
-| `pnpm install`                              | PASS                | pnpm-lock.yaml generated (458 entries)      |
-| `pnpm typecheck`                            | PASS                |                                             |
+| `pnpm install`                              | PASS                | pnpm-lock.yaml in sync                      |
+| `pnpm typecheck`                             | PASS                | incl. new updater/About code                |
 | `pnpm build`                                | PASS                | tsc + vite build, dist/ emitted             |
-| `pnpm lint`                                 | PASS                | 2 react-hooks errors fixed                  |
-| `pnpm test`                                 | PASS                | 4/4, new constants.test.ts                  |
+| `pnpm lint`                                 | PASS                | simplified `eslint .`                       |
+| `pnpm test`                                 | PASS                | 4/4, constants.test.ts                      |
 | `pnpm dev` / `preview` smoke                | PASS                | HTTP 200, correct title                     |
 | `tauri info` / fetch-ffmpeg                 | PASS                | CLI 2.12.3, config valid, binaries download |
 | `pnpm app:dev` / `app:build` native compile | BLOCKED             | No Rust toolchain / webview deps in sandbox |
-| release.yml end-to-end                      | NOT RUN             | Needs a `v*` tag push + signing secrets     |
+| release.yml end-to-end                      | NOT RUN             | Needs `v*` tag push (owner preparing v1.0.0)|
+| Desktop updater flow                        | NOT RUN             | Needs published release with `latest.json`  |
 
 ## 12. Security and Operational Considerations
 
-- Secrets: `.env*` gitignored; `.env.example` is the template (currently
-  leaks a local username path — fix pending). Tauri updater private key
-  must live in GitHub Secrets, never in the repo. No secret values are
-  recorded in this file.
+- Secrets: `.env*` gitignored; `.env.example` is the template
+  (placeholders only). Tauri updater private key must live in GitHub
+  Secrets, never in the repo. No secret values are recorded in this file.
+- **INCIDENT 2026-10-16 — Pixabay API key committed to the public repo.**
+  Owner pushed `69134a2` ("Create .env.local") via the GitHub web UI
+  containing the REAL `VITE_PIXABAY_API_KEY` (bypasses `.gitignore`).
+  Owner deleted the file at the tip via `da6842c` ("Delete .env.local"),
+  but the key remains in git history — **revocation/rotation on Pixabay
+  is still required.** Lesson: never create `.env.local` via the web UI;
+  it lives only on the local machine.
+- Updater trust: `tauri.conf.json` embeds a minisign public key and the
+  releases endpoint — rotating the key requires coordinated config +
+  secret updates. NOTE: the pubkey currently in `tauri.conf.json` is the
+  owner's own keypair (set 2026-10-16 during first-release prep).
 - Updater trust: `tauri.conf.json` embeds a minisign public key and the
   releases endpoint — rotating the key requires coordinated config +
   secret updates.
@@ -345,37 +430,38 @@ install`; npm rewrote `package-lock.json` as a side effect (had to be
 
 ## 13. Known Limitations and Technical Debt
 
-- Zero automated tests despite vitest+jsdom being wired up.
+- One vitest test file (`constants.test.ts`); updater/About code has no
+  tests (Tauri APIs are hard to unit-test; manual desktop QA needed).
 - No offline mode: Quran text/audio/fonts all require network.
 - Export requires WebCodecs + active tab; long videos are CPU-bound in
   the renderer tab.
-- `main.rs` is minimal (one command); window is frameless/transparent
-  (`decorations: false`) — native window behavior UNVERIFIED.
+- Window is frameless/transparent (`decorations: false`) with custom
+  `DesktopControls` — native window behavior on all OSes UNVERIFIED.
 - Dependabot PR #1 (postcss-selector-parser + tailwindcss 3.4.19 → 4.3.3)
   is open and breaking-by-design — do not auto-merge.
-- README is the only user doc and is currently broken/stale (§9).
-- UNVERIFIED: actual GitHub Releases page state, updater `latest.json`
-  flow, installer signing, macOS/Windows/Linux build success.
+- UNVERIFIED: updater `latest.json` end-to-end flow, installer signing,
+  macOS/Windows/Linux build success, Cloudflare deployment.
 
 ## 14. Pending Tasks and Priorities
 
-- **P0:** DONE 2026-10-16 — migration finished, full chain green
-  (typecheck/lint/build/test/dev/preview). Single commit + push pending.
-- **P1:** DONE 2026-10-16 — Tauri/release branding cleanup
-  (`com.dashingmza.quranstudio`, publisher `DashingMZA`, GPL copyright,
-  "Quran Studio" releaseName), README rewrite, `.env.example`
-  placeholder.
+- **P0:** Owner is preparing the first desktop release: GitHub Secrets
+  (`TAURI_SIGNING_PRIVATE_KEY[...]`) → `git tag v1.0.0` → release.yml
+  builds 4 installers → draft release → test installers → publish.
+  All four version fields are in sync at 1.0.0.
+- **P0:** Revoke/rotate the Pixabay API key exposed in `69134a2` (§12).
 - **P1:** License-derivation check: README credits
   `quran8vs/Quran-Video-Studio` (no license listed upstream). Confirm how
   much code is derived and whether GPL-3.0-only labeling is sound.
-- **P2:** DONE 2026-10-16 — first vitest test added
-  (`src/shared/constants/constants.test.ts`, 4/4 pass).
-- **P2:** Verify a desktop build via CI (push `v*` tag after signing
-  secrets are set — see `release.md`) and verify updater artifacts.
-- **P2:** DONE 2026-10-16 — Vercel setup (`vercel.json`,
-  `VITE_PIXABAY_API_KEY` documented in README/`release.md`).
+- **P2:** Verify the desktop updater end-to-end once a release with
+  `latest.json` is published (About page → check → install → relaunch).
+- **P2:** Cloudflare Workers deploy via dashboard Connect-to-Git (owner
+  doing it; build vars documented in `release.md` §4).
+- **P2:** Vercel deploy (add `VITE_PIXABAY_API_KEY` env when wanted).
 - **P3:** Dependabot tailwindcss v4 PR — evaluate separately, never as a
   drive-by.
+- Older completed items: pnpm migration + fix batch (P0, done), Tauri
+  branding cleanup (P1, done), first vitest test (P2, done), Vercel setup
+  (P2, done).
 
 ## 15. Important References
 
@@ -405,3 +491,15 @@ install`; npm rewrote `package-lock.json` as a side effect (had to be
   via `@types/dom-webcodecs@0.1.13`, Tauri metadata + release.yml +
   README + `.env.example` fixed, `vercel.json` + `release.md` added,
   first vitest test added. §2/§8/§9/§11/§14 brought current.
+- **2026-10-16 (catch-up):** Full rewrite of stale sections after owner
+  pointed out MEMORY.md wasn't being updated per change. Recorded:
+  remote history `97b797d`→`f5a019e` (incl. the `.env.local` Pixabay key
+  exposure `69134a2` and its tip-deletion `da6842c` — revocation still
+  required); Cloudflare Workers setup + dashboard flow; scripts
+  verification/simplification; prettier format; vitest
+  `import.meta.dirname` fix; desktop updater wiring + About page +
+  UpdateBanner + window `show()` fix; `@tauri-apps/plugin-process`
+  lesson. AGENTS.md gained a "Lessons learned" section (Tauri
+  visible/show, updater 4-piece wiring, plugin-process, pnpm lockfile
+  churn, Git Data API notes). §§2–5, 7–9, 11–14, 16 current; tree clean,
+  in sync with remote.

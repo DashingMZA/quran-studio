@@ -102,6 +102,37 @@ that must run on the web.
     and verified. Never commit `dist/`, `node_modules/`,
     `src-tauri/target/`, `src-tauri/binaries/ffmpeg*`, or `.env`.
 
+## Lessons learned
+
+- **Tauri `visible: false` needs a JS `show()` call.** `tauri.conf.json`
+  sets the main window `visible: false` to avoid a white flash. If nothing
+  calls `getCurrentWindow().show()`, the app launches invisible (hit
+  2026-10-16 — user installed the .exe and saw nothing). The call lives in
+  `src/index.tsx` at module load, gated behind `isTauri()`.
+- **Tauri v2 updater needs four pieces, not one.** `plugins.updater` in
+  `tauri.conf.json` alone does nothing. Also required (hit 2026-10-16):
+  `tauri-plugin-updater = "2"` in `Cargo.toml`,
+  `.plugin(tauri_plugin_updater::Builder::new().build())` in `main.rs`,
+  and `"updater:default"` in `capabilities/default.json`.
+- **Tauri v2 moved `relaunch`/`exit` out of `@tauri-apps/api`.** There is
+  no `@tauri-apps/api/process` module (verified against 2.12.4). Use
+  `@tauri-apps/plugin-process` (JS) + `tauri-plugin-process = "2"`
+  (Cargo.toml) + `.plugin(tauri_plugin_process::init())` (main.rs) +
+  `"process:default"` capability (hit 2026-10-16).
+- **Desktop-only UI stays behind `isTauri()`.** `DesktopAboutOverlay`,
+  `UpdateBanner`, and the About button render nothing on web. `@tauri-apps/*`
+  plugin imports must be dynamic (`await import(...)`) inside
+  `isTauri()`-gated code paths, never at module top level.
+- **`pnpm add` reformats `pnpm-lock.yaml` quote style.** Cosmetic churn
+  only (hit 2026-10-16: 4800-line diff, zero version changes). Verify with
+  `git diff` that the only real change is the added package.
+- **Git Data API pushes (sandbox has no git-https credentials).** PAT works
+  only on `api.github.com`. Use full SHAs everywhere (short SHAs 404 on
+  `/git/commits`). When comparing recursive trees, filter to
+  `type == "blob"` — directory entries legitimately change. Build the new
+  tree on the *current* remote tip, not the last-known one; re-check the
+  tip immediately before the ref update.
+
 ## Required workflow
 
 Every agent must:

@@ -30,7 +30,7 @@ Read all three before acting.
 - **Key files:** `package.json` (scripts), `vite.config.ts` (dev port
   3000), `tsconfig.json` (strict; note the `types` array),
   `src-tauri/tauri.conf.json` (installer metadata + updater),
-  `src-tauri/src/main.rs` (`get_app_export_path` command),
+  `src-tauri/src/main.rs` (`get_app_export_path` command; updater + process plugins),
   `scripts/fetch-ffmpeg.mjs` / `prepare-ffmpeg.mjs` (sidecar download),
   `.github/workflows/release.yml` (tag-triggered desktop release),
   `.env.example` (placeholders only), `src/config/app-info.json`
