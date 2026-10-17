@@ -9,8 +9,8 @@ export function useVideoExporter(
   config: VideoConfig,
   verses: VerseData[],
   audioUrl: string | null,
-  canvasRef: React.RefObject<HTMLCanvasElement>,
-  audioRef: React.RefObject<HTMLAudioElement>,
+  canvasRef: React.RefObject<HTMLCanvasElement | null>,
+  audioRef: React.RefObject<HTMLAudioElement | null>,
   renderFrameAtTimeRef: React.MutableRefObject<
     ((currentTimeMs: number) => void) | null
   >,

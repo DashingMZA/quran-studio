@@ -12,11 +12,11 @@ import {
 } from "../utils/render-strategies";
 
 interface VideoCanvasProps {
-  canvasRef: React.RefObject<HTMLCanvasElement>;
+  canvasRef: React.RefObject<HTMLCanvasElement | null>;
   config: VideoConfig;
   verses: VerseData[];
   currentVerseIndex: number;
-  audioRef: React.RefObject<HTMLAudioElement>;
+  audioRef: React.RefObject<HTMLAudioElement | null>;
   renderFrameAtTimeRef?: React.MutableRefObject<
     ((currentTimeMs: number) => void) | null
   >;

@@ -4,17 +4,19 @@ Quran Studio is a web and desktop-ready editor for creating Quran recitation vid
 
 Created with thanks for this work: https://github.com/quran8vs/Quran-Video-Studio
 
-The app is built with React, Vite, TypeScript, Tailwind CSS, Bun, and Tauri.
-
+The app is built with React, Vite, TypeScript, Tailwind CSS, pnpm, and Tauri.
 
 ## 📋 Table of Contents
 
 - [✨ Features](#-features)
 - [🛠️ Tech Stack](#️-tech-stack)
 - [🚀 Quick Start](#-quick-start)
+- [📜 Scripts](#-scripts)
 - [⚠️ Troubleshooting](#️-troubleshooting)
 - [📁 Project Structure](#-project-structure)
-- [🖥️ Desktop App Setup (Tauri)](#️-desktop-app-setup-tauri)
+- [🖥️ Desktop App (Tauri)](#️-desktop-app-tauri)
+- [🚢 Release Process](#-release-process)
+- [☁️ Web Deployment (Vercel)](#️-web-deployment-vercel)
 - [📝 License](#-license)
 
 ---
@@ -39,7 +41,7 @@ The app is built with React, Vite, TypeScript, Tailwind CSS, Bun, and Tauri.
 
 ### 💾 Export & Production
 - **MP4 Export** - High-quality video generation
-- **Client-Side Processing** - Fast processing with `mp4-muxer`
+- **Client-Side Processing** - Fast processing with `mediabunny` (WebCodecs)
 - **No Server Upload** - Your videos stay private
 
 ---
@@ -48,11 +50,12 @@ The app is built with React, Vite, TypeScript, Tailwind CSS, Bun, and Tauri.
 
 | Layer | Technology |
 |-------|-----------|
-| **Frontend Framework** | React 18 + TypeScript |
+| **Frontend Framework** | React 19 + TypeScript |
 | **Build Tool** | Vite |
+| **Package Manager** | pnpm 12 (`packageManager` pinned) |
 | **Styling** | Tailwind CSS |
 | **Icons** | Lucide React |
-| **Video Processing** | mp4-muxer |
+| **Video Processing** | mediabunny |
 | **State Management** | React Hooks |
 | **Desktop (Optional)** | Tauri 2.0 |
 
@@ -60,40 +63,33 @@ The app is built with React, Vite, TypeScript, Tailwind CSS, Bun, and Tauri.
 
 ## Requirements
 
-- [Bun](https://bun.sh/)
-- A Pixabay API key
+- [Node.js 24+](https://nodejs.org/) (see `engines` in `package.json`)
+- [pnpm 12.9.1](https://pnpm.io/) — installed automatically via `packageManager` + Corepack
+- A Pixabay API key (for the Image/Video background tabs)
 - A browser with WebCodecs support for MP4 export
 
 ## Environment
 
-Create a `.env.local` file in the project root:
+Copy `.env.example` to `.env` and fill in your values:
 
 ```env
 VITE_PIXABAY_API_KEY=your_pixabay_api_key_here
 ```
 
-The key is used by the Image and Video background tabs to fetch results from Pixabay.
+The key is used by the Image and Video background tabs to fetch results from Pixabay. The web version works without it, but the background tabs will show no results.
 
 ## 🚀 Quick Start
-
-### Prerequisites
-- Node.js 18+ and npm/yarn installed
-
-
-The app will open at `http://localhost:3000` with Hot Module Replacement (HMR).
-
-### Production Build
 
 Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 Start the development server:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Vite is configured to run on port `3000` by default:
@@ -102,37 +98,32 @@ Vite is configured to run on port `3000` by default:
 http://localhost:3000
 ```
 
-## Scripts
+Production build:
 
 ```bash
-npm run dev
+pnpm build
 ```
 
-Start the Vite development server.
+## 📜 Scripts
 
 ```bash
-npm run build
+pnpm dev          # Start the Vite development server
+pnpm build        # Type-check (tsc) and build the production app
+pnpm preview      # Preview the production build locally
+pnpm lint         # Run ESLint (zero warnings allowed)
+pnpm typecheck    # Run tsc --noEmit only
+pnpm test         # Run Vitest test suite
+pnpm format       # Format with Prettier
 ```
 
-Type-check and build the production app.
+Desktop (Tauri) scripts — these download the platform ffmpeg/ffprobe
+sidecar binaries first (they are too large for git, ~130 MB each):
 
 ```bash
-npm run preview
+pnpm app:dev      # Tauri desktop app in development (hot reload)
+pnpm app:build    # Build the desktop installers
+pnpm fetch:ffmpeg # Only download the ffmpeg/ffprobe binaries
 ```
-
-Preview the production build locally.
-
-```bash
-npm run lint
-```
-
-Run ESLint.
-
-```bash
-npm run tauri
-```
-
-Run Tauri CLI commands.
 
 ---
 
@@ -165,6 +156,7 @@ For best results:
 ```text
 src/
   app/                         Main application shell
+  config/                      App metadata (name, version, social links)
   features/
     audio/                     Audio playback and recording hooks
     quran/                     Quran data, surah data, and fetching hooks
@@ -174,71 +166,60 @@ src/
 public/
   fonts/                       Local font assets
   icon/                        App icons and manifest files
+  social_media/                Brand icons (lucide-react no longer ships these)
+src-tauri/                     Tauri desktop shell (Rust + window config)
+scripts/                       ffmpeg/ffprobe sidecar download helpers
+.github/workflows/             CI release workflow (desktop installers)
 ```
 
-## 🖥️ Desktop App Setup (Tauri)
+## 🖥️ Desktop App (Tauri)
 
-### ⚠️ Important: Pre-Configuration Exists
+`src-tauri/` is already fully configured — **do not run `tauri init`**.
 
-**DO NOT run `npx tauri init` directly!** This project has custom Tauri configurations. Follow these steps:
-
-### Step 1: Initialize Tauri
-
-```bash
-npx tauri init
-```
-
-Answer the prompts as follows:
-```
-App name: quran-video-studio
-Window title: quran-video-studio
-Web assets path: ../build
-Dev server URL: http://localhost:3000
-Frontend dev command: npm run dev
-Frontend build command: npm run build
-```
-
-### Step 2: Apply Custom Configuration
-
-1. Navigate to `src-tauri-config/` folder in project root
-2. Copy all contents (files, folders, icons)
-3. Paste into newly created `src-tauri/` folder
-4. Click **Yes to All** when prompted to replace existing files
-
-### Step 3: Install Tauri Dependencies
-
-```bash
-npm install @tauri-apps/api@2.0.0
-
-npx tauri add path
-npx tauri add fs
-npx tauri add dialog
-npx tauri add opener
-npx tauri add log
-
-cd src-tauri && cargo add log && cd ..
-```
-
-### Step 4: Run Desktop App
+Prerequisites: a Rust toolchain (`rustup`) plus the platform webview
+dependencies (see the [Tauri prerequisites](https://tauri.app/start/prerequisites/)).
 
 ```bash
 # Development with hot reload
-npm run tauri dev
+pnpm app:dev
 
-# Build native executable
-npm run tauri build
+# Build native installers (Windows/macOS/Linux)
+pnpm app:build
 ```
+
+The desktop build bundles `ffmpeg`/`ffprobe` as sidecars (downloaded by
+`scripts/fetch-ffmpeg.mjs` from `descriptinc/ffmpeg-ffprobe-static`) and
+supports auto-updates via the updater plugin (see [Release Process](#-release-process)).
+
+## 🚢 Release Process
+
+Desktop releases are built by GitHub Actions (`.github/workflows/release.yml`):
+push a `v*` tag (e.g. `v1.0.0`) and the workflow builds Windows, macOS
+(Apple Silicon + Intel) and Linux installers, then creates a **draft**
+GitHub Release with all artifacts and the updater manifest (`latest.json`).
+
+Full step-by-step guide — signing keys, GitHub Secrets, triggering a
+release: see **[release.md](./release.md)**.
+
+## ☁️ Web Deployment (Vercel)
+
+The web version is a static Vite SPA and deploys to Vercel with zero config:
+
+1. Import the repository in Vercel — the framework is auto-detected as **Vite**.
+2. Build command `pnpm build`, output directory `dist` (already set in `vercel.json`).
+3. Add the environment variable `VITE_PIXABAY_API_KEY` in the Vercel dashboard
+   (Project Settings → Environment Variables) so the background tabs work.
+
+The app detects Tauri vs. web at runtime (`src/shared/utils/platform.ts`),
+so the same build runs on Vercel and inside the desktop shell.
 
 ---
 
 ## 📝 License
 
-This project is open source and available for personal .
+This project is open source under the **GNU General Public License v3.0**
+— see [LICENSE](./LICENSE) for details.
 
 ---
 
-<<<<<<< HEAD
 **Happy creating! 🎬✨**
-=======
-**Happy creating! 🎬✨**
->>>>>>> b707d010a2b31f0ff268aac00006e621b62891be

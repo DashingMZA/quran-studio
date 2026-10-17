@@ -641,7 +641,7 @@ function LiveAudioVisualizer({
   isReady,
   onClock,
 }: {
-  audioRef: React.RefObject<HTMLAudioElement>;
+  audioRef: React.RefObject<HTMLAudioElement | null>;
   isReady: boolean;
   onClock: (timeMs: number) => void;
 }) {

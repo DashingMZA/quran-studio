@@ -6,7 +6,7 @@ export function useAudioRecorder(
   _config: VideoConfig,
   verses: VerseData[],
   audioUrl: string | null,
-  canvasRef: React.RefObject<HTMLCanvasElement>,
+  canvasRef: React.RefObject<HTMLCanvasElement | null>,
 ) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isExporting, setIsExporting] = useState(false);

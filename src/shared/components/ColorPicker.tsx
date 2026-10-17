@@ -43,14 +43,18 @@ export default function ColorPicker({
 }: ColorPickerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [inputVal, setInputVal] = useState(color);
+  const [prevColor, setPrevColor] = useState(color);
   const [position, setPosition] = useState({ top: 0, left: 0 });
 
   const triggerRef = useRef<HTMLButtonElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  // Sync the text input when the parent drives a new color (adjust state
+  // during render instead of setState-in-effect).
+  if (prevColor !== color) {
+    setPrevColor(color);
     setInputVal(color);
-  }, [color]);
+  }
 
   // Handle outside click and scroll to close
   useEffect(() => {

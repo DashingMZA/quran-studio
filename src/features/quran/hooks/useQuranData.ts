@@ -148,6 +148,9 @@ export function useQuranData(config: VideoConfig) {
       config.audioSource === "reciter" ? fullAudioData.audio_files[0] : null;
 
     if (config.audioSource === "reciter" && !audioFile) {
+      // Intentional: this is a synchronous data-processing effect — the
+      // invalid-payload error must surface here, before verse processing.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setErrorMsg("Audio format not supported");
       return;
     }

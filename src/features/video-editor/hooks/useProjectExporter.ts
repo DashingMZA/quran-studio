@@ -7,8 +7,8 @@ export function useProjectExporter(
   config: VideoConfig,
   verses: VerseData[],
   audioUrl: string | null,
-  canvasRef: React.RefObject<HTMLCanvasElement>,
-  audioRef: React.RefObject<HTMLAudioElement>,
+  canvasRef: React.RefObject<HTMLCanvasElement | null>,
+  audioRef: React.RefObject<HTMLAudioElement | null>,
   fullAudioData: any, // Receives the raw audio data for JSON
 ) {
   const [isProjectExporting, setIsProjectExporting] = useState(false);

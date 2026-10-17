@@ -3,10 +3,6 @@ import {
   Info,
   Download,
   Settings,
-  Github,
-  Linkedin,
-  Twitter,
-  Instagram,
   FolderOpen,
   FileText,
   CheckCircle2,
@@ -14,6 +10,18 @@ import {
 import appInfo from "../../config/app-info.json";
 import { getAppDefaultPath, pickDirectory, isTauri } from "../utils/tauri-fs";
 import Tooltip from "./Tooltip";
+
+// Brand icons (lucide-react no longer ships brand glyphs) — served from
+// public/social_media, normalized to fill="currentColor" so they follow
+// the button's text color.
+const SOCIAL_SVG: Record<string, string> = {
+  github: "/social_media/github.svg",
+  linkedin: "/social_media/linkedin.svg",
+  instagram: "/social_media/instagram.svg",
+  facebook: "/social_media/facebook.svg",
+  tiktok: "/social_media/tiktok.svg",
+  x: "/social_media/x.svg",
+};
 
 interface AboutOverlayProps {
   isOpen: boolean;
@@ -75,10 +83,9 @@ export default function AboutOverlay({ isOpen, onClose }: AboutOverlayProps) {
 
   const renderContent = () => {
     const getSocialIcon = (platform: string) => {
-      if (platform === "github") return <Github size={16} />;
-      if (platform === "linkedin") return <Linkedin size={16} />;
-      if (platform === "instagram") return <Instagram size={16} />;
-      if (platform === "x") return <Twitter size={16} />;
+      const src = SOCIAL_SVG[platform];
+      if (src)
+        return <img src={src} alt={platform} className="w-4 h-4" draggable={false} />;
       return <Info size={16} />;
     };
 
