@@ -18,7 +18,7 @@ The app is built with React, Vite, TypeScript, Tailwind CSS, pnpm, and Tauri.
 
 [![Download](https://img.shields.io/badge/Download-000000?style=for-the-badge)](https://github.com/DashingMZA/quran-studio/releases)
 [![Quran Studio](https://img.shields.io/badge/Quran-Studio-111111?style=for-the-badge&labelColor=22C55E)](https://github.com/DashingMZA/quran-studio)
-[![Quran Studio Release](https://img.shields.io/github/v/release/DashingMZA/quran-studio?style=for-the-badge&utm_source=github.com)](https://github.com/DashingMZA/quran-studio/releases)
+[![Version](https://img.shields.io/github/v/release/DashingMZA/quran-studio?style=for-the-badge&label=)](https://github.com/DashingMZA/quran-studio/releases)
 
 <p>
   <sub>Built with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a> • <a href="https://ko-fi.com/dashingmza">Support on Ko-fi ☕</a> • <a href="https://buymeacoffee.com/dashingmza">Support on BuyMeACoffee ☕</a> • <a href="https://dashingmza.gumroad.com/coffee">Support on Gumroad ☕</a></sub>
