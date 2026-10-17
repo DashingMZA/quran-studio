@@ -1,10 +1,25 @@
-# Quran Studio
+# 🎬 Quran Video Studio
 
-Quran Studio is a web and desktop-ready editor for creating Quran recitation videos. It combines Quran text, translations, timed recitation audio, typography controls, and visual backgrounds into an exportable MP4 canvas workflow.
+> Quran Studio is a web and desktop-ready editor for creating Quran recitation videos. It combines Quran text, translations, timed recitation audio, typography controls, and visual backgrounds into an exportable MP4 canvas workflow.
 
 Created with thanks for this work: https://github.com/quran8vs/Quran-Video-Studio
 
 The app is built with React, Vite, TypeScript, Tailwind CSS, pnpm, and Tauri.
+[![License](https://img.shields.io/badge/license-Open%20Source-brightgreen)](LICENSE)
+[![Built with React](https://img.shields.io/badge/built%20with-React-61DAFB?logo=react)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+
+<p>
+  <img src="https://img.shields.io/badge/Dev_by-Zaheer_Ahmad-blue?style=for-the-badge">
+  <br>
+  <sub>Built with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a> • <a href="https://ko-fi.com/dashingmza">Support on Ko-fi ☕</a> • <a href="https://buymeacoffee.com/dashingmza">Support on BuyMeACoffee ☕</a> • <a href="https://dashingmza.gumroad.com/coffee">Support on Gumroad ☕</a></sub>
+</p>
+
+[https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black](https://buymeacoffee.com)
+
+---
+
+![Alt text](public/quran-studio.png)
 
 ## 📋 Table of Contents
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://islamsekho.com/sitemap.xml
+Sitemap: https://quranstudio.cyo/sitemap.xml

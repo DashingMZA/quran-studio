@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://islamsekho.com/</loc>
-<<<<<<< HEAD
-    <lastmod>2026-08-09</lastmod>
-=======
-    <lastmod>2026-02-21</lastmod>
->>>>>>> b707d010a2b31f0ff268aac00006e621b62891be
+    <loc>https://quranstudio.cyo</loc>
+    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
