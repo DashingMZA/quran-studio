@@ -5,7 +5,6 @@
 Inspired by and built with appreciation for [Quran Video Studio](https://github.com/quran8vs/Quran-Video-Studio). Many thanks to the original project contributors.
 
 The app is built with ⬇️
-
 [![License](https://img.shields.io/badge/license-GPLv3-brightgreen)](LICENSE)
 [![React](https://img.shields.io/badge/built%20with-React-61DAFB?logo=react)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
@@ -21,8 +20,8 @@ The app is built with ⬇️
 [![Version](https://img.shields.io/github/v/release/DashingMZA/quran-studio?style=for-the-badge&label=)](https://github.com/DashingMZA/quran-studio/releases)
 
 <p>
-  <sub>Built with love ❤︎ in Pakistan 🇵🇰 U+1F1F5 U+1F1F0 with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a> • <a href="https://www.facebook.com/dashingmza">Contact via Facebook</a></sub>
-</p>
+  <sub>Built with love ❤︎ in Pakistan 🇵🇰 with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a></sub>
+</p>  
 
 [![Support on BuyMeACoffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/dashingmza)
 [![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/dashingmza)
@@ -43,6 +42,8 @@ The app is built with ⬇️
 - [🚢 Release Process](#-release-process)
 - [☁️ Web Deployment](#️-web-deployment)
 - [📝 License](#-license)
+- [❤️ Support My Work](#-support-my-work)
+
 
 ---
 
@@ -277,13 +278,11 @@ This project is open source under the **GNU General Public License v3.0**
 
 ---
 
-## Support My Work
+## ☕ Support My Work
 
-If you find my open-source projects useful, consider supporting my work. Your contributions help me maintain existing projects and build new tools. ⬇️
+If you find my open-source projects useful, consider supporting my work. Your contributions help me maintain existing projects and build new tools.
 
-[![Support on BuyMeACoffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black)](https://buymeacoffee)
-[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/dashingmza)              
-[![Support on Gumroad](https://img.shields.io/badge/Gumroad-FF90E8?style=for-the-badge&logo=gumroad&logoColor=white)](https://dashingmza.gumroad.com/coffee)
+[![Support on BuyMeACoffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black)](https://buymeacoffee)[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/dashingmza)              [![Support on Gumroad](https://img.shields.io/badge/Gumroad-FF90E8?style=for-the-badge&logo=gumroad&logoColor=white)](https://dashingmza.gumroad.com/coffee)
 
 ---
 
