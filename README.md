@@ -19,8 +19,8 @@ The app is built with modern web technologies (React, Vite, TypeScript, Tailwind
 [![Tauri](https://img.shields.io/badge/Tauri-24C8DB?logo=tauri&logoColor=white)](https://tauri.app)
 
 [![Zaheer on Github](https://img.shields.io/badge/Dev_by-Zaheer_Ahmad-blue?style=for-the-badge)](https://github.com/DashingMZA/)
-[![Made with Love](https://img.shields.io/badge/with-Love-red?style=for-the-badge)](https://github.com/DashingMZA/)
 [![Pakistan](https://img.shields.io/badge/Made_in-Pakistan-01411C?style=for-the-badge)](https://github.com/DashingMZA/)
+[![Made with Love](https://img.shields.io/badge/with-Love-red?style=for-the-badge)](https://github.com/DashingMZA/)
 
 <p>
   <sub>Built with love ❤︎ in Pakistan 🇵🇰 with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a></sub>
