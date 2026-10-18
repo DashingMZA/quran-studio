@@ -4,7 +4,7 @@
 
 Inspired by and built with appreciation for [Quran Video Studio](https://github.com/quran8vs/Quran-Video-Studio). Many thanks to the original project contributors.
 
-[![Download](https://img.shields.io/badge/Download-000000?style=for-the-badge)](https://github.com/DashingMZA/quran-studio/releases)                         
+[![Download](https://img.shields.io/badge/Download-000000?style=for-the-badge)](https://github.com/DashingMZA/quran-studio/releases)
 [![Quran Studio](https://img.shields.io/badge/Quran-Studio-111111?style=for-the-badge&labelColor=22C55E)](https://github.com/DashingMZA/quran-studio/releases)
 [![Version](https://img.shields.io/github/v/release/DashingMZA/quran-studio?style=for-the-badge&label=)](https://github.com/DashingMZA/quran-studio/releases)
 
@@ -21,7 +21,7 @@ The app is built with modern web technologies (React, Vite, TypeScript, Tailwind
 [![Zaheer on Github](https://img.shields.io/badge/Dev_by-Zaheer_Ahmad-blue?style=for-the-badge)](https://github.com/DashingMZA/)
 
 <p>
-  <sub>Built with love ❤︎ in Pakistan with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a></sub>
+  <sub>Built with love ❤︎ in Pakistan 🇵🇰 with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a></sub>
 </p>  
 
 [![Support on BuyMeACoffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/dashingmza)
@@ -96,7 +96,7 @@ The app is built with modern web technologies (React, Vite, TypeScript, Tailwind
 
 - [Node.js 24+](https://nodejs.org/) (see `engines` in `package.json`)
 - [pnpm 12.9.1](https://pnpm.io/) — installed automatically via `packageManager` + Corepack
-- A Pixabay API key (for the Image/Video background tabs)
+- A [Pixabay API key](https://pixabay.com/api/docs/) (for the Image/Video background tabs)
 - A browser with WebCodecs support for MP4 export
 
 ## Environment
@@ -250,6 +250,8 @@ otherwise the Image/Video background tabs will be empty.
 2. Build command `pnpm build`, output directory `dist` (already set in `vercel.json`).
 3. Add the environment variable `VITE_PIXABAY_API_KEY` in the Vercel dashboard
    (Project Settings → Environment Variables).
+
+[![Deploy with Vercel](https://img.shields.io/badge/Deploy_to_Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FDashingMZA%2Fquran-studio)
 
 ### 🟠 Cloudflare Workers
 
