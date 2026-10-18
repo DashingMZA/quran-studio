@@ -4,7 +4,12 @@
 
 Inspired by and built with appreciation for [Quran Video Studio](https://github.com/quran8vs/Quran-Video-Studio). Many thanks to the original project contributors.
 
-The app is built with ⬇️
+[![Download](https://img.shields.io/badge/Download-000000?style=for-the-badge)](https://github.com/DashingMZA/quran-studio/releases)                         
+[![Quran Studio](https://img.shields.io/badge/Quran-Studio-111111?style=for-the-badge&labelColor=22C55E)](https://github.com/DashingMZA/quran-studio/releases)
+[![Version](https://img.shields.io/github/v/release/DashingMZA/quran-studio?style=for-the-badge&label=)](https://github.com/DashingMZA/quran-studio/releases)
+
+The app is built with modern web technologies (React, Vite, TypeScript, Tailwind CSS) and can run in the browser or as a Tauri desktop app with native installers for Windows, macOS, and Linux.
+
 [![License](https://img.shields.io/badge/license-GPLv3-brightgreen)](LICENSE)
 [![React](https://img.shields.io/badge/built%20with-React-61DAFB?logo=react)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
@@ -15,12 +20,8 @@ The app is built with ⬇️
 
 [![Zaheer on Github](https://img.shields.io/badge/Dev_by-Zaheer_Ahmad-blue?style=for-the-badge)](https://github.com/DashingMZA/)
 
-[![Download](https://img.shields.io/badge/Download-000000?style=for-the-badge)](https://github.com/DashingMZA/quran-studio/releases)
-[![Quran Studio](https://img.shields.io/badge/Quran-Studio-111111?style=for-the-badge&labelColor=22C55E)](https://github.com/DashingMZA/quran-studio/releases)
-[![Version](https://img.shields.io/github/v/release/DashingMZA/quran-studio?style=for-the-badge&label=)](https://github.com/DashingMZA/quran-studio/releases)
-
 <p>
-  <sub>Built with love ❤︎ in Pakistan 🇵🇰 with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a></sub>
+  <sub>Built with love ❤︎ in Pakistan with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a></sub>
 </p>  
 
 [![Support on BuyMeACoffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/dashingmza)
@@ -282,7 +283,9 @@ This project is open source under the **GNU General Public License v3.0**
 
 If you find my open-source projects useful, consider supporting my work. Your contributions help me maintain existing projects and build new tools.
 
-[![Support on BuyMeACoffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black)](https://buymeacoffee)[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/dashingmza)              [![Support on Gumroad](https://img.shields.io/badge/Gumroad-FF90E8?style=for-the-badge&logo=gumroad&logoColor=white)](https://dashingmza.gumroad.com/coffee)
+[![Support on BuyMeACoffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black)](https://buymeacoffee)
+[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/dashingmza)
+[![Support on Gumroad](https://img.shields.io/badge/Gumroad-FF90E8?style=for-the-badge&logo=gumroad&logoColor=white)](https://dashingmza.gumroad.com/coffee)
 
 ---
 
