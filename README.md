@@ -8,7 +8,7 @@ Inspired by and built with appreciation for [Quran Video Studio](https://github.
 [![Quran Studio](https://img.shields.io/badge/Quran-Studio-111111?style=for-the-badge&labelColor=22C55E)](https://github.com/DashingMZA/quran-studio/releases)
 [![Version](https://img.shields.io/github/v/release/DashingMZA/quran-studio?style=for-the-badge&label=)](https://github.com/DashingMZA/quran-studio/releases)
 
-The app is built with modern web technologies (React, Vite, TypeScript, Tailwind CSS) and can run in the browser or as a Tauri desktop app with native installers for Windows, macOS, and Linux.
+The app is built with modern web technologies (React, Vite, TypeScript, Tailwind CSS) and can run in the browser or as a Desktop app with native installers for Windows, macOS, and Linux.
 
 [![License](https://img.shields.io/badge/license-GPLv3-brightgreen)](LICENSE)
 [![React](https://img.shields.io/badge/built%20with-React-61DAFB?logo=react)](https://react.dev)
@@ -19,6 +19,8 @@ The app is built with modern web technologies (React, Vite, TypeScript, Tailwind
 [![Tauri](https://img.shields.io/badge/Tauri-24C8DB?logo=tauri&logoColor=white)](https://tauri.app)
 
 [![Zaheer on Github](https://img.shields.io/badge/Dev_by-Zaheer_Ahmad-blue?style=for-the-badge)](https://github.com/DashingMZA/)
+[![with Love](https://img.shields.io/badge/with-Love❤︎-Red?style=for-the-badge)](https://github.com/DashingMZA/)
+[![in Pakistan](https://img.shields.io/badge/in-Pakistan-Green?style=for-the-badge)](https://github.com/DashingMZA/)
 
 <p>
   <sub>Built with love ❤︎ in Pakistan 🇵🇰 with the help of AI • <a href="https://t.me/dashingmza">Contact via Telegram</a></sub>
