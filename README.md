@@ -31,7 +31,7 @@ The app is built with modern web technologies (React, Vite, TypeScript, Tailwind
 [![Support on Gumroad](https://img.shields.io/badge/Gumroad-FF90E8?style=for-the-badge&logo=gumroad&logoColor=white)](https://dashingmza.gumroad.com/coffee)
 ---
 
-![Alt text](public/quran-studio.png)
+![Alt text](public/screenshots/quran-studio1.png)
 
 ## 📋 Table of Contents
 
