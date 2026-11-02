@@ -1,17 +1,28 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/*
+ * Tailwind v4 (CSS-first config): the old tailwind.config.ts is gone.
+ * Its theme now lives here in @theme, which is what generates the
+ * bg-studio-*, text-studio-*, border-studio-*, ring-studio-*,
+ * divide-studio-*, from/via-studio-* and accent-studio-* utilities
+ * used across src/ (~180 usages). Tailwind v4 emits these --color-*
+ * variables on :root itself, so var(--color-studio-*) still works
+ * everywhere else (html/body background, scrollbars, arbitrary values).
+ */
+@theme {
+  --color-studio-bg: #09090b;
+  --color-studio-panel: #18181b;
+  --color-studio-border: #27272a;
+  --color-studio-text: #f4f4f5;
+  --color-studio-textMuted: #a1a1aa;
+  --color-studio-accent: #a3004c;
+  --color-studio-accentHover: #7a0038;
+
+  --font-sans: "Inter", sans-serif;
+}
 
 @layer base {
   :root {
-    --color-studio-bg: #09090b;
-    --color-studio-panel: #18181b;
-    --color-studio-border: #27272a;
-    --color-studio-text: #f4f4f5;
-    --color-studio-textMuted: #a1a1aa;
-    --color-studio-accent: #a3004c;
-    --color-studio-accentHover: #7a0038;
-
     /* Subtle shadows for dark mode */
     --shadow-border: 0 0 0 1px rgba(255, 255, 255, 0.08);
     --shadow-border-hover: 0 0 0 1px rgba(255, 255, 255, 0.13);
@@ -24,6 +35,111 @@
   @font-face {
     font-family: "LateefSwashes";
     src: url("/fonts/LateefSwashes.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* Bundled subtitle fonts (Google Fonts, SIL OFL 1.1, Latin subset)
+   * in public/fonts/subtitles/. Variable fonts use a weight range so
+   * the canvas bold (700) instantiates correctly; static fonts need
+   * separate 400/700 faces. Also loaded explicitly via FontFace in
+   * useFontLoader so the canvas waits for the selected font. */
+  @font-face {
+    font-family: "Figtree";
+    src: url("/fonts/subtitles/figtree.woff2") format("woff2");
+    font-weight: 300 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/subtitles/inter.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Roboto";
+    src: url("/fonts/subtitles/roboto.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/subtitles/montserrat.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Poppins";
+    src: url("/fonts/subtitles/poppins-400.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Poppins";
+    src: url("/fonts/subtitles/poppins-700.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lato";
+    src: url("/fonts/subtitles/lato-400.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lato";
+    src: url("/fonts/subtitles/lato-700.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Open Sans";
+    src: url("/fonts/subtitles/open-sans.woff2") format("woff2");
+    font-weight: 300 800;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Nunito";
+    src: url("/fonts/subtitles/nunito.woff2") format("woff2");
+    font-weight: 200 1000;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Manrope";
+    src: url("/fonts/subtitles/manrope.woff2") format("woff2");
+    font-weight: 200 800;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Oswald";
+    src: url("/fonts/subtitles/oswald.woff2") format("woff2");
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* Bundled IndoPak font (Quran Foundation's indopak-nastaleeq-waqf-lazim
+   * v4.2.1, served from verses.quran.foundation). Used for the IndoPak
+   * text script (text_indopak) — the QPC page fonts only contain Uthmani
+   * glyphs, and system fonts do not render IndoPak waqf signs correctly.
+   * Also loaded explicitly via FontFace in useFontLoader so the canvas
+   * waits for it before drawing. Credit: see the About dialog. */
+  @font-face {
+    font-family: "IndoPakNastaleeq";
+    src: url("/fonts/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2")
+      format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;

@@ -25,6 +25,14 @@ export interface VideoConfig {
   backgroundImageY: number;
 
   aspectRatio: "9:16" | "16:9" | "1:1";
+  // Verse translation selection (Quran.com API v4). Both are sent together:
+  // translationId is the `translations=` resource id, translationLanguage
+  // is the matching `language=` ISO code for that translation.
+  translationLanguage: string;
+  translationId: number;
+  // Quran text script (Quran.com API v4 field): "uthmani" → text_uthmani,
+  // "indopak" → text_indopak. See features/quran/data/textScripts.ts.
+  quranTextScript: "uthmani" | "indopak";
   showTranslation: boolean;
   translationColor: string;
   translationHighlightColor: string; // New: Highlight color for translation

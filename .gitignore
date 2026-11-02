@@ -21,6 +21,9 @@ Thumbs.db
 .env*
 !.env.example
 
+
 #Key
-quran-studio.key
-quran-studio.key.pub
+quran-video-maker.key
+quran-video-maker.key.pub
+
+*.zip
